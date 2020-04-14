@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "213609060969",
+    "firebase_url": "https://travel-hub-b8322.firebaseio.com",
+    "project_id": "travel-hub-b8322",
+    "storage_bucket": "travel-hub-b8322.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213609060969:android:d83f6e7a8f7309359720f8",
+        "android_client_info": {
+          "package_name": "com.project.travelhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213609060969-gep040lva5f2kmidepu0pdkkhrkh6avu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.travelhub",
+            "certificate_hash": "cae4d19acdeeabb709f21f3959e27a26adb482ae"
+          }
+        },
+        {
+          "client_id": "213609060969-2u0gdson6thgt91eivs5ootqpu8r2jqu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSj0f2P23wfvbwoIZjSxobDVygVucv-BI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213609060969-2u0gdson6thgt91eivs5ootqpu8r2jqu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

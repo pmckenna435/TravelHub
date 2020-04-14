@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ItineraryEdit">
+
+
+    <RelativeLayout
+    android:layout_width="350dp"
+    android:layout_height="600dp"
+        android:layout_centerInParent="true"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"
+        android:layout_centerHorizontal="true"
+        android:textSize="45dp"
+        android:id="@+id/testpos"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date of the day"
+            android:textSize="25dp"
+            android:layout_below="@+id/testpos"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/txtDateOfSelectedDay"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test text that will be editted by user if they wish to do so"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/txtDateOfSelectedDay"
+            android:layout_centerHorizontal="true"
+            android:textSize="20dp"
+            android:id="@+id/txtChangedText"
+
+            />
+
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save"
+        android:layout_below="@+id/txtChangedText"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+            android:id="@+id/btnSaveChanges"
+        />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_below="@+id/txtChangedText"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:id="@+id/btnCancel"
+            />
+
+
+
+</RelativeLayout>
+
+
+
+
+
+</RelativeLayout>
