@@ -16,6 +16,15 @@ public class TripHomepage extends AppCompatActivity {
 
 
         Button btnItinerary = (Button) findViewById(R.id.btnItinerary);
+        Button btnAddUser = (Button) findViewById(R.id.btnAddUser);
+
+        btnAddUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddUserDialog dialog = new AddUserDialog();
+                dialog.show(getSupportFragmentManager(), "Add user");
+            }
+        });
 
 
 

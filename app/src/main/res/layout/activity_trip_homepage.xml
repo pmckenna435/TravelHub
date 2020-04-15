@@ -25,6 +25,16 @@
             android:background="@android:color/darker_gray"
             android:text="itinerary" />
 
+        <Button
+            android:id="@+id/btnAddUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="250dp"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/darker_gray"
+            android:text="add user" />
+
         <TextView
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"

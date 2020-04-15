@@ -24,7 +24,7 @@ public class OpenTripsAdapter extends RecyclerView.Adapter<OpenTripsAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_display_trip,parent,false);
         return new ViewHolder(v);
     }
 
@@ -39,9 +39,9 @@ public class OpenTripsAdapter extends RecyclerView.Adapter<OpenTripsAdapter.View
             @Override
             public void onClick(View v) {
 
-                Intent  i  = new Intent(context, OpenChats.class );
+                Intent  i  = new Intent(context, TripHomepage.class );
                 i.putExtra("tripname", nextTripname);
-                i.putExtra("tripID", nextTripID);
+                i.putExtra("trip_id", nextTripID);
                 context.startActivity(i);
 
 
