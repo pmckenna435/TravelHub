@@ -2,6 +2,7 @@ package com.project.travelhub;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +15,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class AddUserDialog extends AppCompatDialogFragment {
 
-    private EditText username;
+    private EditText txtusername;
+    private AddUserInterface addUserInterface;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class AddUserDialog extends AppCompatDialogFragment {
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String username = txtusername.getText().toString();
+                addUserInterface.addUser(username);
 
             }
         });
@@ -35,12 +39,24 @@ public class AddUserDialog extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+
             }
         });
 
-        username = view.findViewById(R.id.username);
+        txtusername = view.findViewById(R.id.username);
         return builder.create();
+    }
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        addUserInterface = (AddUserInterface) context;
+    }
+
+    public interface AddUserInterface{
+        public void addUser(String username);
 
     }
 }

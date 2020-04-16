@@ -78,7 +78,7 @@ public class Chat extends AppCompatActivity {
 
     private void getUsersFromDatabase() {
 
-        FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+        // FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         final Context c = this.getBaseContext();
 
