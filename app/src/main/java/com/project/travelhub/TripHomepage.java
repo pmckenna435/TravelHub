@@ -71,12 +71,9 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     String firebaseUsername = String.valueOf(snapshot.child("username").getValue());
 
-                    boolean shouldAdd = false;
-
-
 
                     if(username.equals(firebaseUsername)){
-                        ArrayList user_trips = new ArrayList();
+                        ArrayList user_trips;
                         user_trips = (ArrayList) snapshot.child("user_trips").getValue();
                         user_trips.add(tripID);
 
@@ -92,7 +89,10 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
                                 ArrayList users = new ArrayList();
                                 users = (ArrayList) dataSnapshot.child("users").getValue();
                                 users.add(userID);
-                                ref.child("users").setValue(users);
+                                tripRef.child("users").setValue(users);
+
+                                Toast.makeText(TripHomepage.this,"User " + username + " is added", Toast.LENGTH_SHORT).show();
+
                             }
 
                             @Override
@@ -106,12 +106,6 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
 
                     }
 
-                    // Toast.makeText(Chat.this,String.valueOf(cities_visited[0]), Toast.LENGTH_SHORT).show();
-
-                    //GenericTypeIndicator<User> g = new GenericTypeIndicator<User>() { };
-
-
-                    //User user = snapshot.getValue(g);
 
                 }
 
