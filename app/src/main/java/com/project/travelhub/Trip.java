@@ -2,6 +2,8 @@ package com.project.travelhub;
 
 
 
+import com.project.travelhub.data.Message;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Trip {
     String startDate;
     String endDate;
     List<ItineraryDay> itinerary = new ArrayList<ItineraryDay>();
+    public ArrayList<Message> messages = new ArrayList<Message>();
 
     public Trip(String tripName, List cities, List users, String startDate, String endDate, List<ItineraryDay> itinerary) {
         this.tripName = tripName;
@@ -21,6 +24,8 @@ public class Trip {
         this.startDate = startDate;
         this.endDate = endDate;
         this.itinerary = itinerary;
+        Message test = new Message();
+        this.messages.add(test);
     }
 
 

@@ -25,9 +25,26 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_homepage);
 
+        Intent in = getIntent();
+        final String tripID = in.getStringExtra("trip_id");
 
         Button btnItinerary = (Button) findViewById(R.id.btnItinerary);
         Button btnAddUser = (Button) findViewById(R.id.btnAddUser);
+        Button btnChat = (Button) findViewById(R.id.btnGroupChat);
+
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent  i  = new Intent(TripHomepage.this, OpenChats.class );
+
+                i.putExtra("ID", tripID);
+                i.putExtra("refToUse" , "Trips");
+                startActivity(i);
+
+            }
+        });
 
         btnAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,14 +60,14 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
             @Override
             public void onClick(View v) {
 
-                Intent in = getIntent();
-                final String tripID = in.getStringExtra("trip_id");
 
                 Intent i = new Intent(TripHomepage.this , Itinerary.class);
                 i.putExtra("trip_id", tripID);
                 startActivity(i);
             }
         });
+
+
 
     }
 

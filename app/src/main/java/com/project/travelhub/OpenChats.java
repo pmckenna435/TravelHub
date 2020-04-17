@@ -36,16 +36,24 @@ public class OpenChats extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_chats);
         Intent i = getIntent();
-        final String chatID = i.getStringExtra("ChatID");
+        final String iD = i.getStringExtra("ID");
 
-        Toast.makeText(OpenChats.this,chatID, Toast.LENGTH_SHORT).show();
-        getMessagesFromDatabase(chatID);
+        final String refToUse = i.getStringExtra("refToUse");
+
+        Toast.makeText(OpenChats.this,iD, Toast.LENGTH_SHORT).show();
+        getMessagesFromDatabase(iD, refToUse);
         btnSendMessage = findViewById(R.id.btnSend);
         userText = findViewById((R.id.txtMessage));
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Chats").child(chatID).child("messages");
+
+
+                final DatabaseReference ref;
+
+                ref = FirebaseDatabase.getInstance().getReference(refToUse).child(iD).child("messages");
+
+
 
 
                 ref.addValueEventListener(new ValueEventListener() {
@@ -84,32 +92,16 @@ public class OpenChats extends AppCompatActivity {
 
                     }
                 });
-
-
-
-
-
-
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
     } // on create
 
-    public void getMessagesFromDatabase(String chatID){
+    public void getMessagesFromDatabase(String iD, String refToUse){
 
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Chats").child(chatID).child("messages");
+        DatabaseReference ref;
+
+        ref = FirebaseDatabase.getInstance().getReference(refToUse).child(iD).child("messages");
 
         final Context c = this.getBaseContext();
 
@@ -126,32 +118,12 @@ public class OpenChats extends AppCompatActivity {
 
                }
 
-
-
-
-
-               // messages.add(new Message("userone", "this is the 1st message"));
-               // messages.add(new Message("usertwo", "this is the 2nd message"));
-               //messages = (ArrayList<Message>) dataSnapshot.child("messages").getValue();
-               //String textTest = messages.get(0).getText();
-                //Toast.makeText(OpenChats.this,textTest, Toast.LENGTH_SHORT).show();
-
-              // RecyclerView rvUsers;
-             //  RecyclerView.Adapter adapter;
-
-              rvUsers =  findViewById(R.id.rvMessages);
-              // RecyclerView.LayoutManager lm = new LinearLayoutManager(getBaseContext());
-
-                LinearLayoutManager lm = new LinearLayoutManager(getBaseContext());
+               rvUsers =  findViewById(R.id.rvMessages);
+               LinearLayoutManager lm = new LinearLayoutManager(getBaseContext());
                lm.setStackFromEnd(true);
                rvUsers.setLayoutManager(lm);
-
                adapter = new DisplayChatsAdapter(messages,c);
-              rvUsers.setAdapter(adapter);
-
-
-
-
+               rvUsers.setAdapter(adapter);
 
             }
 

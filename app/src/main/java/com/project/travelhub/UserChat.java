@@ -93,17 +93,7 @@ public class UserChat extends AppCompatActivity {
         });
 
 
-        //user_chats = mDatabase.child(fuser).child("user_chats");
 
-
-
-        //mDatabase.child("Chats").push().setValue(cm);
-
-
-        //String w = mDatabase.child("Chats").getKey();
-
-
-        //mDatabase.child("Users").child(fuser).child("user_chats").setValue(w);
         Toast.makeText(UserChat.this,childkey, Toast.LENGTH_SHORT).show();
 
 
@@ -111,12 +101,7 @@ public class UserChat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                // ArrayList<Message> messages = new ArrayList<Message>();
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Chats");
-
-
-
-
-
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Chats").child(childkey);
 
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override

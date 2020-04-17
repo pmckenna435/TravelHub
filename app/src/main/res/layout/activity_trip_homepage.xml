@@ -15,6 +15,17 @@
 
         >
 
+
+        <Button
+            android:id="@+id/btnGroupChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="150dp"
+
+            android:background="@android:color/darker_gray"
+            android:text="Chat" />
+
         <Button
             android:id="@+id/btnItinerary"
             android:layout_width="wrap_content"

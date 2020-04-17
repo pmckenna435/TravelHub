@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.project.travelhub.data.Message;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,6 +37,7 @@ public class TripCreation extends AppCompatActivity {
     private  TextView test;
     private List cities = new ArrayList();
     private EditText city;
+    public ArrayList<Message> messages;
     Calendar startCal = Calendar.getInstance();
     Calendar endCal = Calendar.getInstance();
 
