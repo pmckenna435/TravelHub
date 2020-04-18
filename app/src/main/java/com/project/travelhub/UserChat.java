@@ -38,30 +38,20 @@ public class UserChat extends AppCompatActivity {
         userText = findViewById(R.id.txtMessage);
 
 
-
-
         i = getIntent();
         String e = i.getStringExtra("email");
 
+
         String fuser;
-
         fuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //ArrayList<Message> messages = new ArrayList<Message>();
-
         final Message message = new Message(fuser, "this is the 1st message");
-
         messages.add(message);
-
         ChatMessenger cm = new ChatMessenger(fuser,e,messages);
-
         final DatabaseReference mDatabase , refTest;
         DatabaseReference mRef;
-
-
-
         mRef = FirebaseDatabase.getInstance().getReference("Chats");
         DatabaseReference childRef = mRef.push();
-        // String childKey = childRef.getKey();
+
         childkey = childRef.getKey();
         mRef.child(childkey).setValue(cm); // above creates chat in firebase
 
@@ -82,7 +72,7 @@ public class UserChat extends AppCompatActivity {
                 user_chats = (ArrayList) dataSnapshot.child("user_chats").getValue();
                 //snapshot.child("cities_visited").getValue()
                 user_chats.add(childkey);
-                refTest.child("user_chats").setValue(user_chats);
+                mDatabase.child("user_chats").setValue(user_chats);
 
             }
 

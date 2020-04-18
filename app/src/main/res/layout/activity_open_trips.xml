@@ -23,13 +23,16 @@
             />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="new"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="+"
             android:layout_alignParentRight="true"
             android:layout_marginTop="40dp"
             android:layout_marginRight="25dp"
             android:id="@+id/btnNewTrip"
+            android:background="@drawable/button_round"
+            android:height="30dp"
+            android:width="30dp"
                 />
 
         <androidx.recyclerview.widget.RecyclerView

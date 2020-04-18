@@ -10,6 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.project.travelhub.data.User;
 
 import java.util.ArrayList;
@@ -32,6 +37,11 @@ public class OpenChatsAdapter extends RecyclerView.Adapter<OpenChatsAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final String nextUser = (String) users.get(position);
         final String nextChat = (String) chats.get(position);
+
+
+
+
+
         holder.userEmail.setText(nextUser);
 
 

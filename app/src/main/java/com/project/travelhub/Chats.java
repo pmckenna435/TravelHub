@@ -65,6 +65,8 @@ public class Chats extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List user_chats = new ArrayList();
+                openChats.clear();
+                openChatsUsernames.clear();
                 user_chats = (ArrayList) dataSnapshot.child("user_chats").getValue();
                // String user = (String) dataSnapshot.child("email").getValue();
                 String user = (String) FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -89,8 +91,7 @@ public class Chats extends AppCompatActivity {
        final Context c = this.getBaseContext();
         for (int i = 1; i < size; i++ ){
             final String chatID = (String) userchats.get(i);
-           // Toast.makeText(Chats.this,"before val", Toast.LENGTH_SHORT).show();
-           // Toast.makeText(Chats.this,"event", Toast.LENGTH_SHORT).show();
+
             ref = FirebaseDatabase.getInstance().getReference("Chats").child(chatID);
 
             ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -100,7 +101,7 @@ public class Chats extends AppCompatActivity {
                     String createdUser = (String) dataSnapshot.child("createdUser").getValue();
                     //Toast.makeText(Chats.this,createdUser, Toast.LENGTH_SHORT).show();
                     //Toast.makeText(Chats.this,"test", Toast.LENGTH_SHORT).show();
-                    String displayUser = "";
+                    String displayUser;
                     if (user.equals(createdUser)){
                         displayUser = (String) dataSnapshot.child("nonCreatedUser").getValue();
 
@@ -126,35 +127,7 @@ public class Chats extends AppCompatActivity {
                 }
             }); // add val event listener
 
-        }// for loop for populating the usernames list to display
-
-        //while loop waiting on user data to be collected
-
-       // while( shouldContinue == false){
-        //    Toast.makeText(Chats.this,"while loop", Toast.LENGTH_SHORT).show();
-        //}
-
-        //Toast.makeText(Chats.this,"outside loop", Toast.LENGTH_SHORT).show();
-
-        // next block of code diplays users in the recyclerview
-
-        //Toast.makeText(Chats.this,String.valueOf(usernames.get(0)), Toast.LENGTH_SHORT).show();
-
-        //List cities_visited = new ArrayList();
-       // cities_visited.add("london");
-        //cities_visited.add("dublin");
-       // ArrayList<User> chatUsers = new ArrayList<User>();
-
-        //chatUsers.add(new User("testemail@gmail.com", cities_visited ));
-       // chatUsers.add(new User("testTwoemail@gmail.com", cities_visited));
-
-        //rvUsers =  findViewById(R.id.rvUserList);
-        //RecyclerView.LayoutManager lm = new LinearLayoutManager(getBaseContext());
-        //rvUsers.setLayoutManager(lm);
-
-        //adapter = new UserAdapter(chatUsers,c);
-        //rvUsers.setAdapter(adapter);
-
+        }
 
 
 
@@ -171,25 +144,14 @@ public class Chats extends AppCompatActivity {
         final Context c = this.getBaseContext();
 
 
-       // Toast.makeText(Chats.this,"into the populate", Toast.LENGTH_SHORT).show();
-
-
-
-       /*ArrayList chatUsers = new ArrayList();
-       ArrayList chatcodes = new ArrayList();
-
-       chatUsers.add("testemail@gmail.com");
-       chatUsers.add("two@gmail.com");
-       chatcodes.add("qwertyuiop");
-       chatcodes.add("asdfghjkla"); */
-
-       rvUsers =  findViewById(R.id.rvOpenChats);
+        rvUsers =  findViewById(R.id.rvOpenChats);
        // RecyclerView.LayoutManager lm = new LinearLayoutManager(getBaseContext());
        LinearLayoutManager lm = new LinearLayoutManager(getBaseContext());
        //lm.setStackFromEnd(true);
        rvUsers.setLayoutManager(lm);
 
        adapter = new OpenChatsAdapter(openChatsUsernames,openChats,c);
+
        rvUsers.setAdapter(adapter);
 
 

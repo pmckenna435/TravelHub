@@ -42,7 +42,7 @@ public class Chat extends AppCompatActivity {
         //rvUsers = findViewById(R.id.rvUserList);
         //rvUsers.setHasFixedSize(true);
 
-        getUsersFromDatabase();
+        //getUsersFromDatabase();
 
         final Button btnSearch = findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -88,18 +88,30 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 chatUsers.clear();
+                ArrayList<String> userID = new ArrayList<String>();
+
+
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    String username = String.valueOf(snapshot.child("username").getValue());
-                    String email = String.valueOf(snapshot.child("email").getValue());
+                    String username = snapshot.child("username").getValue().toString();
+                    String email = snapshot.child("email").getValue().toString();
                     ArrayList cities_visited = new ArrayList();
                     cities_visited = (ArrayList) snapshot.child("cities_visited").getValue();
                     boolean shouldAdd = false;
-                    shouldAdd = searchArray(cities_visited);
+
+                    String currentUser;
+
+                    currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    String snapshotUser = snapshot.getKey();
+
+                    if(!currentUser.equals(snapshotUser)) {
+                        shouldAdd = searchArray(cities_visited);
+                    }
 
 
                     if(shouldAdd){
                         User user = new User(email,cities_visited,username);
                         chatUsers.add(user);
+                        userID.add(snapshotUser);
 
                     }
 
@@ -116,7 +128,7 @@ public class Chat extends AppCompatActivity {
                 RecyclerView.LayoutManager lm = new LinearLayoutManager(getBaseContext());
                 rvUsers.setLayoutManager(lm);
 
-                adapter = new UserAdapter(chatUsers,c);
+                adapter = new UserAdapter(chatUsers,userID ,c);
                 rvUsers.setAdapter(adapter);
             }
 
