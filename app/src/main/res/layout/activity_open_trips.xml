@@ -41,6 +41,8 @@
             android:layout_below="@+id/txtTripsTitle"
             android:layout_marginTop="25dp"
             android:id="@+id/rvOpenTrips"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
 
 
         />

@@ -28,13 +28,14 @@
 
         <Button
             android:id="@+id/btnItinerary"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="250dp"
+            android:background="@drawable/button_rec_round"
+            android:text="itinerary"
 
-            android:background="@android:color/darker_gray"
-            android:text="itinerary" />
+            android:textColor="#F9FDFD" />
 
         <Button
             android:id="@+id/btnAddUser"
