@@ -19,9 +19,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textColor="#1BC901"
+        android:textColor="@android:color/white"
+        android:background="@drawable/recieved_text_background"
         android:text="Received Message Example"
         android:textSize="20dp"
+        android:padding="5dp"
 
 
 

@@ -14,14 +14,16 @@
 
         <EditText
             android:id="@+id/txtMessage"
-            android:layout_width="254dp"
+            android:layout_width="300dp"
             android:layout_height="45dp"
 
             android:layout_alignParentBottom="false"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="15dp"
             android:layout_below="@+id/rvMessages"
             android:layout_marginBottom="95dp"
             android:hint="Enter Message..."
+            android:layout_toLeftOf="@+id/btnSend"
+            android:layout_marginRight="5dp"
             android:inputType="textPersonName" />
 
 
@@ -30,14 +32,15 @@
             android:layout_width="380dp"
             android:layout_height="400dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="80dp"
 
             android:background="@android:color/background_light" />
 
         <Button
             android:id="@+id/btnSend"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="false"
             android:layout_marginRight="35dp"

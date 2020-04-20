@@ -15,18 +15,19 @@
         >
 
 
+        <TextView
+            android:id="@+id/txtSentMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:text="Sent Message Example test to see what it will look like "
+            android:textColor="@android:color/white"
+            android:background="@drawable/sent_text_background"
+            android:textSize="20dp"
+            android:padding="5dp"
 
-    <TextView
-        android:id="@+id/txtSentMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:textColor="#0229E7"
-        android:text="Sent Message Example"
-        android:textSize="20dp"
-
-         />
+            />
 
 </RelativeLayout>
 

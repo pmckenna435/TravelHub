@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="280dp">
+    android:layout_height="280dp"
+    android:background="@color/colorPrimaryDark"
+    >
 
     <RelativeLayout
         android:layout_width="325dp"
         android:layout_height="230dp"
-        android:background="@color/colorPrimary"
+        android:background="@android:color/white"
         android:layout_centerInParent="true"
 
         >
@@ -18,6 +20,7 @@
             android:text="TEST DATE 06/04/2020"
             android:layout_centerHorizontal="true"
             android:textSize="20dp"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="10dp"
             android:id="@+id/txtdate"
 
@@ -26,7 +29,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="EXAMPLE OF TEXT TO DISPLAY FOR ACTIVITY FO TODAY"
-
+            android:textColor="@color/colorPrimaryDark"
             android:layout_centerHorizontal="true"
             android:id="@+id/txtActivity"
             android:layout_below="@+id/txtdate"

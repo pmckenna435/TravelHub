@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#177219</color>
     <color name="colorAccent">#61A562</color>
     <color name="ButtonMenu">#FA0303</color>
-    <color name="SentText">#FF9800</color>
-    <color name="RecText">#863196</color>
+    <color name="SentText">#1752CC</color>
+    <color name="RecText">#732B81</color>
 
 </resources>
 

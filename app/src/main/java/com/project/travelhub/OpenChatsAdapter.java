@@ -61,6 +61,9 @@ public class OpenChatsAdapter extends RecyclerView.Adapter<OpenChatsAdapter.View
 
     }
 
+
+
+
     @Override
     public int getItemCount() {
         int size = 0;

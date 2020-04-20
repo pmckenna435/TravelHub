@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="325dp"
         android:layout_height="100dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/button_rec_round_green"
         android:layout_centerInParent="true"
 
         >

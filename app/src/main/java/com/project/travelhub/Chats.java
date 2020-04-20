@@ -88,6 +88,7 @@ public class Chats extends AppCompatActivity {
        // List usernames = new ArrayList();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Chats");
+        final DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
        final Context c = this.getBaseContext();
         for (int i = 1; i < size; i++ ){
             final String chatID = (String) userchats.get(i);
@@ -103,10 +104,11 @@ public class Chats extends AppCompatActivity {
                     //Toast.makeText(Chats.this,"test", Toast.LENGTH_SHORT).show();
                     String displayUser;
                     if (user.equals(createdUser)){
-                        displayUser = (String) dataSnapshot.child("nonCreatedUser").getValue();
+                       displayUser = (String) dataSnapshot.child("nonCreatedUser").getValue();
 
                     }else{
                         displayUser = (String) dataSnapshot.child("createdUser").getValue();
+
                     }
 
                     addToList(displayUser, chatID);

@@ -11,7 +11,7 @@
     android:layout_width="350dp"
     android:layout_height="600dp"
         android:layout_centerInParent="true"
-    android:background="@color/colorPrimaryDark">
+   >
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,12 +35,11 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Test text that will be editted by user if they wish to do so"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
+            android:text="Test text that will be edited by user if they wish to do so"
+
             android:layout_marginTop="20dp"
             android:layout_below="@id/txtDateOfSelectedDay"
-            android:layout_centerHorizontal="true"
+
             android:textSize="20dp"
             android:id="@+id/txtChangedText"
 
@@ -53,17 +52,21 @@
         android:layout_below="@+id/txtChangedText"
         android:layout_alignParentRight="true"
         android:layout_marginTop="20dp"
+            android:textColor="@android:color/white"
             android:id="@+id/btnSaveChanges"
+            android:background="@drawable/button_rec_round_green"
         />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
+            android:textColor="@android:color/white"
             android:layout_below="@+id/txtChangedText"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
             android:id="@+id/btnCancel"
+            android:background="@drawable/button_rec_round"
             />
 
 

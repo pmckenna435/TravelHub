@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="350dp"
         android:layout_height="650dp"
-        android:background="@color/colorPrimary"
+
         android:layout_centerInParent="true"
 
         >
@@ -23,12 +23,14 @@
             android:textSize="40dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
+            android:id="@+id/txtTitle"
             />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginTop="125dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTitle"
+            android:layout_marginTop="15dp"
             android:background="@color/colorAccent"
             android:id="@+id/rvItinerary"
 
