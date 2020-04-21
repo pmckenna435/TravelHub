@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,7 @@ public class Chat extends AppCompatActivity {
     private RecyclerView rvUsers;
     private RecyclerView.Adapter adapter;
     private ArrayList<User> chatUsers = new ArrayList<User>();
-
+    private String username;
     //private ArrayList<User> chatUsers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,9 @@ public class Chat extends AppCompatActivity {
         //rvUsers.setHasFixedSize(true);
 
         //getUsersFromDatabase();
+
+        Intent i = getIntent();
+        username = i.getStringExtra("username");
 
         final Button btnSearch = findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +132,7 @@ public class Chat extends AppCompatActivity {
                 RecyclerView.LayoutManager lm = new LinearLayoutManager(getBaseContext());
                 rvUsers.setLayoutManager(lm);
 
-                adapter = new UserAdapter(chatUsers,userID ,c);
+                adapter = new UserAdapter(chatUsers,userID,username ,c);
                 rvUsers.setAdapter(adapter);
             }
 

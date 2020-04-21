@@ -24,6 +24,7 @@ public class OpenChatsAdapter extends RecyclerView.Adapter<OpenChatsAdapter.View
     private ArrayList chats;
     private ArrayList users;
     private Context context;
+    private String username;
     //private List<User> users;
     @NonNull
     @Override
@@ -50,7 +51,7 @@ public class OpenChatsAdapter extends RecyclerView.Adapter<OpenChatsAdapter.View
             public void onClick(View v) {
 
                 Intent  i  = new Intent(context, OpenChats.class );
-                i.putExtra("username", nextUser);
+                i.putExtra("username", username);
                 i.putExtra("ID", nextChat);
                 i.putExtra("refToUse" , "Chats");
                 context.startActivity(i);
@@ -72,10 +73,11 @@ public class OpenChatsAdapter extends RecyclerView.Adapter<OpenChatsAdapter.View
         return size;
     }
 
-    public OpenChatsAdapter(ArrayList users, ArrayList chats, Context c){
+    public OpenChatsAdapter(ArrayList users, ArrayList chats,String username, Context c){
         this .context = c;
         this.chats = chats;
         this.users = users;
+        this.username = username;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

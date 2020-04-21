@@ -48,10 +48,10 @@ public class SignUp extends AppCompatActivity {
         btnAddCityToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String cityToAdd = city.getText().toString().trim();
-                cities.add(cityToAdd);
-                city.setText("");
-                Toast.makeText(SignUp.this,"City Added", Toast.LENGTH_SHORT).show();
+             // String cityToAdd = city.getText().toString().trim();
+              //  cities.add(cityToAdd);
+             //   city.setText("");
+              //  Toast.makeText(SignUp.this,"City Added", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -64,14 +64,15 @@ public class SignUp extends AppCompatActivity {
                 final String userEmail = email.getText().toString().trim();
                 String userPassword = password.getText().toString().trim();
                 final String userUsername = username.getText().toString().trim();
-
+                String cityToAdd = city.getText().toString().trim();
+                cities.add(cityToAdd);
 
 
                 fAuth.createUserWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(SignUp.this,"success!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this,"Account Created", Toast.LENGTH_SHORT).show();
                             String userid = fAuth.getCurrentUser().getUid();
                             User user = new User(userEmail,cities,userUsername);
                             // populate user info table

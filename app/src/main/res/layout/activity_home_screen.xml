@@ -20,9 +20,22 @@
         android:textSize="35dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:text="Welcome"
+        android:textColor="@color/colorPrimaryDark"
          />
+
+        <TextView
+            android:id="@+id/txtUsernameDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35dp"
+            android:layout_below="@id/textView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Username test"/>
 
     <Button
         android:id="@+id/btnChat"
@@ -32,7 +45,7 @@
         android:layout_marginBottom="50dp"
         android:layout_marginTop="50dp"
         android:text="Chat"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/txtUsernameDisplay"
          />
 
     <Button

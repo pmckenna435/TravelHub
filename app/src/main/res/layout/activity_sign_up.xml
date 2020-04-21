@@ -23,13 +23,30 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="40dp"
         android:layout_marginRight="20dp"
-         />
+        android:background="@drawable/button_rec_round_green"
+        android:textColor="@android:color/white"
+        />
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Clear"
+            android:layout_below="@+id/txtCity"
+            android:layout_alignParentRight="false"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button_rec_round"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="15dp"
+            />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Account"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:textSize="20dp"
@@ -47,7 +64,7 @@
 
 
         android:ems="7"
-        android:hint="City Visited"
+        android:hint="Home City"
         android:inputType="textPersonName"
          />
 

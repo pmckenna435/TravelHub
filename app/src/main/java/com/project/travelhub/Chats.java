@@ -33,11 +33,16 @@ public class Chats extends AppCompatActivity {
     private ArrayList openChatsUsernames = new ArrayList();
     private int counter = 1;
     private boolean shouldContinue = false;
+    private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
         getUserChatsFromDatabase();
+
+        Intent i = getIntent();
+        username = i.getStringExtra("username");
+        Toast.makeText(Chats.this,"the username is " + username, Toast.LENGTH_SHORT).show();
 
         btnSearchChat = findViewById(R.id.btnNewChat);
 
@@ -45,6 +50,7 @@ public class Chats extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Chats.this , Chat.class);
+                i.putExtra("username", username);
                 startActivity(i);
             }
         });
@@ -68,8 +74,10 @@ public class Chats extends AppCompatActivity {
                 openChats.clear();
                 openChatsUsernames.clear();
                 user_chats = (ArrayList) dataSnapshot.child("user_chats").getValue();
+
+
                // String user = (String) dataSnapshot.child("email").getValue();
-                String user = (String) FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String user = (String) dataSnapshot.child("username").getValue();
                 getUsersFromDatabase(user_chats,user);
             }
 
@@ -152,7 +160,7 @@ public class Chats extends AppCompatActivity {
        //lm.setStackFromEnd(true);
        rvUsers.setLayoutManager(lm);
 
-       adapter = new OpenChatsAdapter(openChatsUsernames,openChats,c);
+       adapter = new OpenChatsAdapter(openChatsUsernames,openChats,username,c);
 
        rvUsers.setAdapter(adapter);
 

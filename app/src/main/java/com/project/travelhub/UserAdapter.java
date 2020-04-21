@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+    private String currentUser;
     private ArrayList<User> users;
     private Context context;
     private ArrayList<String> usersID;
@@ -50,10 +51,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                //childkey;
                String fuser;
                fuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-               final Message message = new Message(fuser, "this is the 1st message");
+               final Message message = new Message(currentUser, "this is the 1st message");
                ArrayList<Message> messages = new ArrayList<Message>();
                messages.add(message);
-               ChatMessenger cm = new ChatMessenger(fuser,nextUserID,messages);
+               ChatMessenger cm = new ChatMessenger(currentUser,nextUser.getUsername(),messages);
                final DatabaseReference currentUserRef ;
                final DatabaseReference otherUserRef;
                DatabaseReference mRef;
@@ -116,6 +117,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
               i.putExtra("ID", chatID);
               i.putExtra("refToUse", "Chats");
+              i.putExtra("username", currentUser);
+              i.putExtra("otherUser" , "");
               context.startActivity(i);
 
 
@@ -132,10 +135,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         return size;
     }
 
-    public UserAdapter(ArrayList<User> users, ArrayList<String> usersID, Context c){
+    public UserAdapter(ArrayList<User> users, ArrayList<String> usersID,String currentUsername, Context c){
         this .context = c;
         this.users= users;
         this.usersID = usersID;
+        this.currentUser = currentUsername;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

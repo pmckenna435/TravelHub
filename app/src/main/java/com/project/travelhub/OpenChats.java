@@ -31,6 +31,7 @@ public class OpenChats extends AppCompatActivity {
     ArrayList<Message> messages = new ArrayList<Message>();
     Button btnSendMessage;
     TextView userText;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,10 @@ public class OpenChats extends AppCompatActivity {
         final String iD = i.getStringExtra("ID");
 
         final String refToUse = i.getStringExtra("refToUse");
+       if(refToUse.equals("Chats")){
+            username = i.getStringExtra("username");
+       }
+
 
         Toast.makeText(OpenChats.this,iD, Toast.LENGTH_SHORT).show();
         getMessagesFromDatabase(iD, refToUse);
@@ -56,9 +61,6 @@ public class OpenChats extends AppCompatActivity {
                 final DatabaseReference ref;
 
                 ref = FirebaseDatabase.getInstance().getReference(refToUse).child(iD).child("messages");
-
-
-
 
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -78,7 +80,7 @@ public class OpenChats extends AppCompatActivity {
                             String fuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             userText.setText("");
 
-                            final Message message = new Message(fuser, userMessage);
+                            final Message message = new Message(username, userMessage);
                             myMessages.add(message);
 
 
