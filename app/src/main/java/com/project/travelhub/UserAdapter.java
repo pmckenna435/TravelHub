@@ -51,7 +51,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                //childkey;
                String fuser;
                fuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-               final Message message = new Message(currentUser, "this is the 1st message");
+               User start = new User();
+               start.setUsername("start");
+               final Message message = new Message();
                ArrayList<Message> messages = new ArrayList<Message>();
                messages.add(message);
                ChatMessenger cm = new ChatMessenger(currentUser,nextUser.getUsername(),messages);

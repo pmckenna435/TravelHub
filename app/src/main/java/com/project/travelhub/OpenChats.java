@@ -25,11 +25,11 @@ import com.project.travelhub.data.Message;
 
 import java.util.ArrayList;
 
-public class OpenChats extends AppCompatActivity {
+public class OpenChats extends AppCompatActivity implements RateUserDialog.RateUserInterface {
     RecyclerView rvUsers;
     RecyclerView.Adapter adapter;
     ArrayList<Message> messages = new ArrayList<Message>();
-    Button btnSendMessage;
+    Button btnSendMessage , btnRating;
     TextView userText;
     String username;
 
@@ -44,15 +44,26 @@ public class OpenChats extends AppCompatActivity {
         final String iD = i.getStringExtra("ID");
 
         final String refToUse = i.getStringExtra("refToUse");
-       if(refToUse.equals("Chats")){
+
             username = i.getStringExtra("username");
-       }
+
 
 
         Toast.makeText(OpenChats.this,iD, Toast.LENGTH_SHORT).show();
         getMessagesFromDatabase(iD, refToUse);
         btnSendMessage = findViewById(R.id.btnSend);
         userText = findViewById((R.id.txtMessage));
+        btnRating = findViewById(R.id.btnRate);
+
+        btnRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // creates the dialog to allow the user to rate
+                RateUserDialog dialog = new RateUserDialog();
+                dialog.show(getSupportFragmentManager(), "Rating");
+            }
+        });
+
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +139,7 @@ public class OpenChats extends AppCompatActivity {
                LinearLayoutManager lm = new LinearLayoutManager(getBaseContext());
                lm.setStackFromEnd(true);
                rvUsers.setLayoutManager(lm);
-               adapter = new DisplayChatsAdapter(messages,c);
+               adapter = new DisplayChatsAdapter(messages,username,c);
                rvUsers.setAdapter(adapter);
 
             }
@@ -142,4 +153,13 @@ public class OpenChats extends AppCompatActivity {
 
     }
 
+    @Override
+    public void rateUser(double rateUser) {
+        // following code adds the rating to the users total
+        // as well as the amount of ratings the user has received
+
+        Toast.makeText(OpenChats.this,"rating " + rateUser, Toast.LENGTH_SHORT).show();
+
+
+    }
 }

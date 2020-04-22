@@ -34,7 +34,7 @@ public class Itinerary extends AppCompatActivity {
         Toast.makeText(Itinerary.this,tripID, Toast.LENGTH_SHORT).show();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Trips").child(tripID).child("itinerary");
 
-        Toast.makeText(Itinerary.this,"test before", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(Itinerary.this,"test before", Toast.LENGTH_SHORT).show();
 
         final Context c = this.getBaseContext();
 

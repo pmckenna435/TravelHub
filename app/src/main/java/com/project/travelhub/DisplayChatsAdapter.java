@@ -21,6 +21,7 @@ public class DisplayChatsAdapter extends RecyclerView.Adapter<DisplayChatsAdapte
 
     private Context context;
     private ArrayList<Message> messages = new ArrayList<Message>();
+    private  String usename;
     //private List<User> users;
     @NonNull
     @Override
@@ -28,7 +29,10 @@ public class DisplayChatsAdapter extends RecyclerView.Adapter<DisplayChatsAdapte
         if (viewType == 1) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sent_text, parent, false);
             return new ViewHolder(v);
-        }else{
+        }else if (viewType == 2){
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_start, parent, false);
+            return new ViewHolder(v);
+        }else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_received_text, parent, false);
             return new ViewHolder(v);
         }
@@ -62,9 +66,10 @@ public class DisplayChatsAdapter extends RecyclerView.Adapter<DisplayChatsAdapte
         return size;
     }
 
-    public DisplayChatsAdapter(ArrayList<Message> amessages, Context c){
+    public DisplayChatsAdapter(ArrayList<Message> messages, String username, Context c){
         this.context = c;
-        this.messages = amessages;
+        this.messages = messages;
+        this.usename = username;
 
     }
 
@@ -82,13 +87,15 @@ public class DisplayChatsAdapter extends RecyclerView.Adapter<DisplayChatsAdapte
 
     @Override
     public int getItemViewType(int position) {
-        String fuser;
+        //String fuser;
 
-        fuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+       // fuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        if(messages.get(position).getSender().equals(fuser)){
+        if(messages.get(position).getSender().equals(usename)){
             return 1;
-        } else{
+        } else if(messages.get(position).getSender().equals("start")){
+            return 2;
+        }else{
             return 0;
         }
 

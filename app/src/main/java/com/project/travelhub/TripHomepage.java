@@ -24,10 +24,11 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_homepage);
+        final String username;
 
         Intent in = getIntent();
         final String tripID = in.getStringExtra("trip_id");
-
+        username = in.getStringExtra("username");
         Button btnItinerary = (Button) findViewById(R.id.btnItinerary);
         Button btnAddUser = (Button) findViewById(R.id.btnAddUser);
         Button btnChat = (Button) findViewById(R.id.btnGroupChat);
@@ -41,6 +42,7 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
 
                 i.putExtra("ID", tripID);
                 i.putExtra("refToUse" , "Trips");
+                i.putExtra("username", username);
                 startActivity(i);
 
             }

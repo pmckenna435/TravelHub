@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="30dp">
+
+
+        <TextView
+            android:id="@+id/txtSentMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@android:color/black"
+            android:background="@android:color/white"
+            android:text="This is the start of the chat"
+            android:textSize="15dp"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"
+
+
+
+
+            />
+    </RelativeLayout>
+</RelativeLayout>

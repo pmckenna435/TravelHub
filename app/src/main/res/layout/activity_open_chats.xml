@@ -11,6 +11,16 @@
         android:layout_height="match_parent"
         android:background="@android:color/background_light">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rate"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/button_rec_round_green"
+            android:id="@+id/btnRate"
+            />
+
 
         <EditText
             android:id="@+id/txtMessage"

@@ -5,8 +5,8 @@ public class Message {
     public String text;
 
     public Message() {
-        this.sender = "No sender";
-        this.text = "No Message";
+        this.sender = "start";
+        this.text = "This is the start of the chat";
     }
 
     public Message(String sender, String text) {

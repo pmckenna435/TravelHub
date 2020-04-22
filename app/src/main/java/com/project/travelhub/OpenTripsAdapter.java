@@ -19,6 +19,7 @@ public class OpenTripsAdapter extends RecyclerView.Adapter<OpenTripsAdapter.View
     private ArrayList tripIDs;
     private ArrayList tripnames;
     private Context context;
+    private String username;
     //private List<User> users;
     @NonNull
     @Override
@@ -42,6 +43,7 @@ public class OpenTripsAdapter extends RecyclerView.Adapter<OpenTripsAdapter.View
                 Intent  i  = new Intent(context, TripHomepage.class );
                 i.putExtra("tripname", nextTripname);
                 i.putExtra("trip_id", nextTripID);
+                i.putExtra("username" , username);
                 context.startActivity(i);
 
 
@@ -58,10 +60,11 @@ public class OpenTripsAdapter extends RecyclerView.Adapter<OpenTripsAdapter.View
         return size;
     }
 
-    public OpenTripsAdapter(ArrayList IDs, ArrayList names, Context c){
+    public OpenTripsAdapter(ArrayList IDs, ArrayList names, String username, Context c){
         this .context = c;
         this.tripIDs = names;
         this.tripnames = IDs;
+        this.username = username;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

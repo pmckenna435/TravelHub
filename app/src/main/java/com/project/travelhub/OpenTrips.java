@@ -31,13 +31,17 @@ public class OpenTrips extends AppCompatActivity {
     private ArrayList openTripsID = new ArrayList();
     private ArrayList openTripsnames = new ArrayList();
     private int counter = 1;
+    private String username;
     private boolean shouldContinue = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_trips);
         getUserTripsFromDatabase();
+        Intent in = getIntent();
 
+        username = in.getStringExtra("username");
+        //final String username;
 
 
 
@@ -48,6 +52,8 @@ public class OpenTrips extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(OpenTrips.this , TripCreation.class);
+
+                i.putExtra("username" , username);
                 startActivity(i);
             }
         });
@@ -150,7 +156,7 @@ public class OpenTrips extends AppCompatActivity {
         //lm.setStackFromEnd(true);
         rvTrips.setLayoutManager(lm);
 
-        adapter = new OpenTripsAdapter(openTripsnames,openTripsID,c);
+        adapter = new OpenTripsAdapter(openTripsnames,openTripsID, username,c);
         rvTrips.setAdapter(adapter);
 
 

@@ -58,6 +58,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomeScreen.this , OpenTrips.class);
+                i.putExtra("username", username);
                 startActivity(i);
             }
         });

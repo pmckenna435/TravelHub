@@ -35,6 +35,7 @@ public class TripCreation extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener endDate;
     private TextView endDateText;
     private  TextView test;
+    private String username;
     private List cities = new ArrayList();
     private EditText city;
     public ArrayList<Message> messages;
@@ -47,6 +48,10 @@ public class TripCreation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_creation);
 
+
+        Intent in = getIntent();
+
+        username = in.getStringExtra("username");
         final Calendar startCal = Calendar.getInstance();
         final Calendar endCal = Calendar.getInstance();
        city = findViewById(R.id.etCity);
@@ -148,6 +153,7 @@ public class TripCreation extends AppCompatActivity {
 
                Intent toTripPage = new Intent(TripCreation.this , TripHomepage.class);
                toTripPage.putExtra("trip_id", childkey);
+               toTripPage.putExtra("username", username);
                startActivity(toTripPage);
 
            }
