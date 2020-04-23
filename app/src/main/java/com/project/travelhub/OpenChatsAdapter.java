@@ -53,6 +53,7 @@ public class OpenChatsAdapter extends RecyclerView.Adapter<OpenChatsAdapter.View
                 Intent  i  = new Intent(context, OpenChats.class );
                 i.putExtra("username", username);
                 i.putExtra("ID", nextChat);
+                i.putExtra("recUsername", nextUser);
                 i.putExtra("refToUse" , "Chats");
                 context.startActivity(i);
 

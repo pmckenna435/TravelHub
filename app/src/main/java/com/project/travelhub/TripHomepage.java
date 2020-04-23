@@ -90,7 +90,8 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     String firebaseUsername = String.valueOf(snapshot.child("username").getValue());
 
-
+                    // following code checks if the username in db matches the username that the user has input
+                    // if it matches then the id gets added to the users information
                     if(username.equals(firebaseUsername)){
                         ArrayList user_trips;
                         user_trips = (ArrayList) snapshot.child("user_trips").getValue();
@@ -102,6 +103,7 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
 
                         final DatabaseReference tripRef = FirebaseDatabase.getInstance().getReference("Trips").child(tripID);
 
+                        // following code adds the user id to the trip section of db.
                         tripRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

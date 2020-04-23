@@ -120,6 +120,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
               i.putExtra("ID", chatID);
               i.putExtra("refToUse", "Chats");
               i.putExtra("username", currentUser);
+               i.putExtra("recUsername", nextUser.getUsername());
               i.putExtra("otherUser" , "");
               context.startActivity(i);
 

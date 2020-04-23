@@ -23,7 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.project.travelhub.data.ChatMessenger;
 import com.project.travelhub.data.Message;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import static java.lang.Double.valueOf;
 
 public class OpenChats extends AppCompatActivity implements RateUserDialog.RateUserInterface {
     RecyclerView rvUsers;
@@ -32,6 +35,7 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
     Button btnSendMessage , btnRating;
     TextView userText;
     String username;
+    String recUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +49,12 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
 
         final String refToUse = i.getStringExtra("refToUse");
 
-            username = i.getStringExtra("username");
-
+        username = i.getStringExtra("username");
+        if(refToUse.equals("Chats")){
+            recUsername = i.getStringExtra("recUsername");
+            TextView displayUsername = findViewById(R.id.txtDisplayUsername);
+            displayUsername.setText(recUsername);
+        }
 
 
         Toast.makeText(OpenChats.this,iD, Toast.LENGTH_SHORT).show();
@@ -154,9 +162,80 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
     }
 
     @Override
-    public void rateUser(double rateUser) {
+    public void rateUser(final double rateUser) {
         // following code adds the rating to the users total
         // as well as the amount of ratings the user has received
+
+
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    String id = snapshot.getKey();
+                    String snapshotUsername = snapshot.child("username").getValue().toString();
+
+                    if(recUsername.equals(snapshotUsername)){
+                        // get current user amount
+                        String amountOfRatings = (String) snapshot.child("number_of_ratings").getValue();
+                       String totalRating = (String) snapshot.child("rating_total").getValue();
+
+
+                       double test = Double.parseDouble(amountOfRatings);
+                       double testtwo = Double.parseDouble(totalRating);
+
+                        // make the changes to the values
+                        test ++;
+                        //long test = (long) rateUser;
+                        testtwo = testtwo + rateUser;
+
+
+                       String sTest = String.valueOf(test);
+                       String sTestTwo = String.valueOf(testtwo);
+
+
+
+                       // amountOfRatings ++;
+                        //long test = (long) rateUser;
+                       // totalRating = totalRating + test;
+                       //double avg = testtwo/test;
+                       // DecimalFormat decformat = new DecimalFormat("#.##");
+                       // avg = valueOf(decformat.format(avg));
+
+
+                       // Toast.makeText(OpenChats.this,"avg " + avg, Toast.LENGTH_SHORT).show();
+
+                        // uploads the new values
+
+                        ref.child(id).child("number_of_ratings").setValue(sTest);
+                       ref.child(id).child("rating_total").setValue(sTestTwo);
+
+
+                       // double testone = 2;
+                       // double testtwo = 10;
+
+                       // ref.child(id).child("number_of_ratings").setValue(testone);
+                       // ref.child(id).child("rating_total").setValue(testtwo);
+
+
+
+
+                    }
+
+
+
+                } // for loop
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         Toast.makeText(OpenChats.this,"rating " + rateUser, Toast.LENGTH_SHORT).show();
 

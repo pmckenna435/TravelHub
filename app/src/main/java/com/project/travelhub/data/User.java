@@ -10,6 +10,8 @@ public class User {
     public List cities_visited = new ArrayList();
     public List user_chats = new ArrayList();
     public  List user_trips = new ArrayList();
+    public double rating_total;
+    public int number_of_ratings;
 
     public String getUsername() {
         return username;
@@ -45,6 +47,9 @@ public class User {
         this.cities_visited = cities_visited;
         user_chats.add("User has no Chats");
         user_trips.add("user has no trips");
+        rating_total = 0;
+        number_of_ratings = 0;
+
 
     }
 
