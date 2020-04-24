@@ -30,6 +30,7 @@ public class Chats extends AppCompatActivity {
     Button btnSearchChat;
     private RecyclerView.Adapter adapter;
     private ArrayList openChats = new ArrayList();
+    private ArrayList cities = new ArrayList();
     private ArrayList openChatsUsernames = new ArrayList();
     private int counter = 1;
     private boolean shouldContinue = false;
@@ -73,6 +74,7 @@ public class Chats extends AppCompatActivity {
                 List user_chats = new ArrayList();
                 openChats.clear();
                 openChatsUsernames.clear();
+                cities.clear();
                 user_chats = (ArrayList) dataSnapshot.child("user_chats").getValue();
 
 
@@ -98,6 +100,8 @@ public class Chats extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Chats");
         final DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
        final Context c = this.getBaseContext();
+
+       // iterates through all chats in users chat list
         for (int i = 1; i < size; i++ ){
             final String chatID = (String) userchats.get(i);
 
@@ -106,11 +110,12 @@ public class Chats extends AppCompatActivity {
             ref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    int index = 1;
+                   // int index = 1;
                     String createdUser = (String) dataSnapshot.child("createdUser").getValue();
-                    //Toast.makeText(Chats.this,createdUser, Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(Chats.this,"test", Toast.LENGTH_SHORT).show();
+
                     String displayUser;
+
+                    // gets the correct user from firebase, not the current user
                     if (user.equals(createdUser)){
                        displayUser = (String) dataSnapshot.child("nonCreatedUser").getValue();
 
@@ -119,7 +124,8 @@ public class Chats extends AppCompatActivity {
 
                     }
 
-                    addToList(displayUser, chatID);
+                    String city = dataSnapshot.child("dCity").getValue().toString();
+                    addToList(displayUser, chatID ,city);
                     shouldContinue = checkContinue(size);
 
                     if (shouldContinue == true){
@@ -144,10 +150,11 @@ public class Chats extends AppCompatActivity {
     } // display users
 
 
-    public void addToList(String username, String ChatID){
+    public void addToList(String username, String ChatID, String city){
         Toast.makeText(Chats.this,ChatID, Toast.LENGTH_SHORT).show();
         openChatsUsernames.add(username);
         openChats.add(ChatID);
+        cities.add(city);
     }
 
     public void populateRecyclerview(){
@@ -160,7 +167,7 @@ public class Chats extends AppCompatActivity {
        //lm.setStackFromEnd(true);
        rvUsers.setLayoutManager(lm);
 
-       adapter = new OpenChatsAdapter(openChatsUsernames,openChats,username,c);
+       adapter = new OpenChatsAdapter(openChatsUsernames,openChats,username,cities, c);
 
        rvUsers.setAdapter(adapter);
 

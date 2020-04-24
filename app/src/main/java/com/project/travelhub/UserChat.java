@@ -46,7 +46,7 @@ public class UserChat extends AppCompatActivity {
         fuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final Message message = new Message(fuser, "this is the 1st message");
         messages.add(message);
-        ChatMessenger cm = new ChatMessenger(fuser,e,messages);
+        ChatMessenger cm = new ChatMessenger();
         final DatabaseReference mDatabase , refTest;
         DatabaseReference mRef;
         mRef = FirebaseDatabase.getInstance().getReference("Chats");
@@ -112,7 +112,7 @@ public class UserChat extends AppCompatActivity {
 
                                 final Message message = new Message(fuser, userMessage);
                                 messages.add(message);
-                                ChatMessenger cm = new ChatMessenger(fuser,e,messages);
+                                ChatMessenger cm = new ChatMessenger();
 
                                 DatabaseReference mDatabase;
                                 mDatabase = FirebaseDatabase.getInstance().getReference();

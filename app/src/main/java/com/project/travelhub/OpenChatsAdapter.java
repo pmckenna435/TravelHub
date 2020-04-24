@@ -22,6 +22,7 @@ import java.util.List;
 
 public class OpenChatsAdapter extends RecyclerView.Adapter<OpenChatsAdapter.ViewHolder> {
     private ArrayList chats;
+    private ArrayList cities;
     private ArrayList users;
     private Context context;
     private String username;
@@ -38,12 +39,12 @@ public class OpenChatsAdapter extends RecyclerView.Adapter<OpenChatsAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final String nextUser = (String) users.get(position);
         final String nextChat = (String) chats.get(position);
+        final String nextCity = (String) cities.get(position);
 
 
+        holder.city.setText(nextCity);
 
-
-
-        holder.userEmail.setText(nextUser);
+        holder.username.setText(nextUser);
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -74,21 +75,24 @@ public class OpenChatsAdapter extends RecyclerView.Adapter<OpenChatsAdapter.View
         return size;
     }
 
-    public OpenChatsAdapter(ArrayList users, ArrayList chats,String username, Context c){
+    public OpenChatsAdapter(ArrayList users, ArrayList chats,String username, ArrayList cities, Context c){
         this .context = c;
         this.chats = chats;
         this.users = users;
         this.username = username;
+        this.cities = cities;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public final View view;
-        public final TextView userEmail;
+        public final TextView username;
+        public final TextView city;
 
         public ViewHolder(View view){
             super(view);
             this.view = view;
-            userEmail = view.findViewById(R.id.txtUserEmail);
+            username = view.findViewById(R.id.txtUserEmail);
+            city = view.findViewById(R.id.txtRateOrCity);
         }
 
     }

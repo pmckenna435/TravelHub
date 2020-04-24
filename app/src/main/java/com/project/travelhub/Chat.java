@@ -98,6 +98,9 @@ public class Chat extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     String username = snapshot.child("username").getValue().toString();
                     String email = snapshot.child("email").getValue().toString();
+                    String amountOfRatings =  snapshot.child("number_of_ratings").getValue().toString();
+                    String totalRating =  snapshot.child("rating_total").getValue().toString();
+
                     ArrayList cities_visited = new ArrayList();
                     cities_visited = (ArrayList) snapshot.child("cities_visited").getValue();
                     boolean shouldAdd = false;
@@ -113,9 +116,12 @@ public class Chat extends AppCompatActivity {
 
 
                     if(shouldAdd){
-                        User user = new User(email,cities_visited,username);
+
+
+                        User user = new User(email,cities_visited,username,totalRating,amountOfRatings);
                         chatUsers.add(user);
                         userID.add(snapshotUser);
+
 
                     }
 
@@ -128,11 +134,14 @@ public class Chat extends AppCompatActivity {
 
                 }
 
+                EditText DesiredCityTxt = findViewById(R.id.txtCity);
+                String DesiredCity = DesiredCityTxt.getText().toString().trim();
+
                 rvUsers =  findViewById(R.id.rvUserList);
                 RecyclerView.LayoutManager lm = new LinearLayoutManager(getBaseContext());
                 rvUsers.setLayoutManager(lm);
 
-                adapter = new UserAdapter(chatUsers,userID,username ,c);
+                adapter = new UserAdapter(chatUsers,userID,username,DesiredCity ,c);
                 rvUsers.setAdapter(adapter);
             }
 

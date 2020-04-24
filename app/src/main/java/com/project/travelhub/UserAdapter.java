@@ -19,12 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.project.travelhub.data.ChatMessenger;
 import com.project.travelhub.data.Message;
 import com.project.travelhub.data.User;
-
+import java.text.DecimalFormat;
+import static java.lang.Double.valueOf;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-    private String currentUser;
+    private String currentUser ;
+    private String city;
     private ArrayList<User> users;
     private Context context;
     private ArrayList<String> usersID;
@@ -40,6 +42,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
        final User nextUser = users.get(position);
        final String nextUserID = usersID.get(position);
+
+       String tempTotal = nextUser.getRating_total();
+       String tempAmount = nextUser.getNumber_of_ratings();
+
+       double tempDoubleTotal = Double.parseDouble(tempTotal);
+       double tempDoubleAmount = Double.parseDouble(tempAmount);
+
+        double avg = tempDoubleTotal/tempDoubleAmount;
+         DecimalFormat decFormat = new DecimalFormat("#.##");
+         avg = valueOf(decFormat.format(avg));
+
+
+
+       holder.rating.setText("Rating: " + avg);
        holder.username.setText(nextUser.getUsername());
 
 
@@ -56,7 +72,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                final Message message = new Message();
                ArrayList<Message> messages = new ArrayList<Message>();
                messages.add(message);
-               ChatMessenger cm = new ChatMessenger(currentUser,nextUser.getUsername(),messages);
+               ChatMessenger cm = new ChatMessenger(city ,currentUser,nextUser.getUsername(),messages);
                final DatabaseReference currentUserRef ;
                final DatabaseReference otherUserRef;
                DatabaseReference mRef;
@@ -138,21 +154,24 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         return size;
     }
 
-    public UserAdapter(ArrayList<User> users, ArrayList<String> usersID,String currentUsername, Context c){
+    public UserAdapter(ArrayList<User> users, ArrayList<String> usersID,String currentUsername,String city, Context c){
         this .context = c;
         this.users= users;
         this.usersID = usersID;
         this.currentUser = currentUsername;
+        this.city = city;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public final View view;
         public final TextView username;
+        public final TextView rating;
 
         public ViewHolder(View view){
             super(view);
             this.view = view;
             username = view.findViewById(R.id.txtUserEmail);
+            rating = view.findViewById(R.id.txtRateOrCity);
         }
 
     }

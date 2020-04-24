@@ -10,8 +10,16 @@ public class User {
     public List cities_visited = new ArrayList();
     public List user_chats = new ArrayList();
     public  List user_trips = new ArrayList();
-    public double rating_total;
-    public int number_of_ratings;
+    public String rating_total;
+    public String number_of_ratings;
+
+    public String getRating_total() {
+        return rating_total;
+    }
+
+    public String getNumber_of_ratings() {
+        return number_of_ratings;
+    }
 
     public String getUsername() {
         return username;
@@ -47,8 +55,20 @@ public class User {
         this.cities_visited = cities_visited;
         user_chats.add("User has no Chats");
         user_trips.add("user has no trips");
-        rating_total = 0;
-        number_of_ratings = 0;
+        rating_total = "0";
+        number_of_ratings = "0";
+
+
+    }
+
+    public User(String email, List cities_visited, String username , String rating_total, String number_of_ratings){
+        this.username = username;
+        this.email = email;
+        this.cities_visited = cities_visited;
+        user_chats.add("User has no Chats");
+        user_trips.add("user has no trips");
+        this.rating_total = rating_total;
+        this.number_of_ratings = number_of_ratings;
 
 
     }

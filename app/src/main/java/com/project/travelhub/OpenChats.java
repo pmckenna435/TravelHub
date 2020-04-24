@@ -34,6 +34,7 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
     ArrayList<Message> messages = new ArrayList<Message>();
     Button btnSendMessage , btnRating;
     TextView userText;
+    String ID;
     String username;
     String recUsername;
 
@@ -46,7 +47,7 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
 
         Intent i = getIntent();
         final String iD = i.getStringExtra("ID");
-
+        this.ID = iD;
         final String refToUse = i.getStringExtra("refToUse");
 
         username = i.getStringExtra("username");
@@ -54,6 +55,33 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
             recUsername = i.getStringExtra("recUsername");
             TextView displayUsername = findViewById(R.id.txtDisplayUsername);
             displayUsername.setText(recUsername);
+            final DatabaseReference chatRef;
+            chatRef = FirebaseDatabase.getInstance().getReference(refToUse).child(iD);
+            // check if the user has been rated for this chat
+            // as the user can only provide 1 rating per chat
+            chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String userRated = dataSnapshot.child("ratedUser").getValue().toString();
+                    String userValidForRating = dataSnapshot.child("createdUser").getValue().toString();
+
+                    if((userRated.equals("false")) && (username.equals(userValidForRating))){
+
+                        Button btnRate = findViewById(R.id.btnRate);
+                        btnRate.setVisibility(View.VISIBLE);
+
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
         }
 
 
@@ -182,17 +210,17 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
                        String totalRating = (String) snapshot.child("rating_total").getValue();
 
 
-                       double test = Double.parseDouble(amountOfRatings);
-                       double testtwo = Double.parseDouble(totalRating);
+                       double sAmountOfRatings = Double.parseDouble(amountOfRatings);
+                       double sRating = Double.parseDouble(totalRating);
 
                         // make the changes to the values
-                        test ++;
+                        sAmountOfRatings ++;
                         //long test = (long) rateUser;
-                        testtwo = testtwo + rateUser;
+                        sRating = sRating + rateUser;
 
 
-                       String sTest = String.valueOf(test);
-                       String sTestTwo = String.valueOf(testtwo);
+                       String sTest = String.valueOf(sAmountOfRatings);
+                       String sTestTwo = String.valueOf(sRating);
 
 
 
@@ -210,6 +238,17 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
 
                         ref.child(id).child("number_of_ratings").setValue(sTest);
                        ref.child(id).child("rating_total").setValue(sTestTwo);
+
+                        Intent i = getIntent();
+                        final String iD = i.getStringExtra("ID");
+
+                        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chats").child(iD);
+
+                        chatRef.child("ratedUser").setValue("true");
+
+                        Button btnRate = findViewById(R.id.btnRate);
+                        btnRate.setVisibility(View.INVISIBLE);
+                        Toast.makeText(OpenChats.this,"Thank you for rating " + recUsername, Toast.LENGTH_SHORT).show();
 
 
                        // double testone = 2;
