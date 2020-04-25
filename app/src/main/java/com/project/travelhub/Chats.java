@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +41,51 @@ public class Chats extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chats);
+
+
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+
+        navBar.setSelectedItemId(R.id.nbChats);
+
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+
+                switch (menuItem.getItemId())
+
+                {
+
+                    case R.id.nbChats:
+
+                        Intent i = new Intent(Chats.this , Chats.class);
+                        i.putExtra("username", username);
+
+                        startActivity(i);
+
+                        break;
+
+                    case R.id.nbTrips:
+                        Intent ii = new Intent(Chats.this , OpenTrips.class);
+                        ii.putExtra("username", username);
+                        startActivity(ii);
+                        break;
+
+                    case R.id.nbhome:
+
+                        Intent in = new Intent(Chats.this , HomeScreen.class);
+                        in.putExtra("username", username);
+                        startActivity(in);
+                        break;
+
+                }
+
+
+                return true;
+            }
+        });
+
+
         getUserChatsFromDatabase();
 
         Intent i = getIntent();

@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +44,48 @@ public class OpenTrips extends AppCompatActivity {
 
         username = in.getStringExtra("username");
         //final String username;
+
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+        navBar.setSelectedItemId(R.id.nbTrips);
+
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+
+                switch (menuItem.getItemId())
+
+                {
+
+                    case R.id.nbChats:
+
+                        Intent i = new Intent(OpenTrips.this , Chats.class);
+                        i.putExtra("username", username);
+
+                        startActivity(i);
+
+                        break;
+
+                    case R.id.nbTrips:
+                        Intent ii = new Intent(OpenTrips.this , OpenTrips.class);
+                        ii.putExtra("username", username);
+                        startActivity(ii);
+                        break;
+
+                    case R.id.nbhome:
+
+                        Intent in = new Intent(OpenTrips.this , HomeScreen.class);
+                        in.putExtra("username", username);
+                        startActivity(in);
+                        break;
+
+                }
+
+
+                return true;
+            }
+        });
+
 
 
 

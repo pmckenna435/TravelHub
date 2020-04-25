@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/grad_background"
     tools:context=".OpenTrips">
 
     <RelativeLayout
@@ -46,6 +47,16 @@
 
 
         />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/navBar"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+
+            app:menu="@menu/menu_nav"
+
+            />
 
 
 

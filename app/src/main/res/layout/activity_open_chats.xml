@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserChat">
+    android:background="@drawable/grad_background"
+    tools:context=".UserChat"
+
+    >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@android:color/background_light">
+        >
 
         <Button
             android:layout_width="50dp"
@@ -55,7 +58,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="80dp"
 
-            android:background="@android:color/background_light" />
+             />
 
         <Button
             android:id="@+id/btnSend"

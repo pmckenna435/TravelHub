@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/grad_background"
     tools:context=".TripHomepage">
 
 
     <RelativeLayout
         android:layout_width="350dp"
         android:layout_height="650dp"
-        android:background="@color/colorPrimary"
+
         android:layout_centerInParent="true"
 
         >
@@ -22,20 +23,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="150dp"
-
-            android:background="@android:color/darker_gray"
+            android:drawableTop="@drawable/ic_group_chat"
+            android:background="@android:color/transparent"
             android:text="Chat" />
 
         <Button
             android:id="@+id/btnItinerary"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="250dp"
-            android:background="@drawable/button_rec_round"
+            android:drawableTop="@drawable/ic_itinerary"
             android:text="itinerary"
+            android:background="@android:color/transparent"
 
-            android:textColor="#F9FDFD" />
+
+
+             />
 
         <Button
             android:id="@+id/btnAddUser"
@@ -44,7 +48,8 @@
             android:layout_marginRight="45dp"
             android:layout_marginTop="250dp"
             android:layout_alignParentRight="true"
-            android:background="@android:color/darker_gray"
+            android:drawableTop="@drawable/ic_add"
+            android:background="@android:color/transparent"
             android:text="add user" />
 
         <TextView

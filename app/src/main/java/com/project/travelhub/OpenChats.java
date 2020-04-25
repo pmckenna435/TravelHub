@@ -45,6 +45,9 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+
+
+
         Intent i = getIntent();
         final String iD = i.getStringExtra("ID");
         this.ID = iD;

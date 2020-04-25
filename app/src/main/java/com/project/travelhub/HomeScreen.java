@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +25,47 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         String ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+
+                switch (menuItem.getItemId())
+
+                {
+
+                    case R.id.nbChats:
+
+                        Intent i = new Intent(HomeScreen.this , Chats.class);
+                        i.putExtra("username", username);
+
+                        startActivity(i);
+
+                        break;
+
+                    case R.id.nbTrips:
+                        Intent ii = new Intent(HomeScreen.this , OpenTrips.class);
+                        ii.putExtra("username", username);
+                        startActivity(ii);
+                        break;
+
+                    case R.id.nbhome:
+
+                        Intent in = new Intent(HomeScreen.this , HomeScreen.class);
+                        in.putExtra("username", username);
+                       startActivity(in);
+                        break;
+
+                }
+
+
+                return true;
+            }
+        });
+
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(ID);
 
