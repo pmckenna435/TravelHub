@@ -4,37 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Itinerary"
+    tools:context=".CitiesVisited"
     android:background="@drawable/grad_background"
-    >
 
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:layout_centerInParent="true"
-
-        >
+        android:layout_height="match_parent">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Itinerary"
-            android:textSize="40dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            android:id="@+id/txtTitle"
+            android:id="@+id/txtYourCitiesVisited"
+            android:text="Cities"
+            android:layout_marginTop="35dp"
+            android:textColor="@android:color/black"
+            android:textSize="35dp"
+           android:layout_centerHorizontal="true"
             />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/txtYourCitiesVisited"
+            android:id="@+id/rvCities"
+
+            />
+
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtTitle"
-            android:layout_margin="5dp"
-            android:background="@color/colorAccent"
-            android:id="@+id/rvItinerary"
+            android:id="@+id/btnAddCities"
+            android:layout_marginRight="20dp"
+            android:text="Add city"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="25dp"
+            android:layout_alignParentRight="true"
+            android:drawableTop="@drawable/ic_add_city"
 
             />
 
@@ -44,8 +53,11 @@
             android:id="@+id/navBar"
             android:layout_alignParentBottom="true"
             android:background="@android:color/white"
+
             app:menu="@menu/menu_nav"
             />
+
+
 
 
     </RelativeLayout>

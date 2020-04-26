@@ -11,7 +11,8 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+
         >
 
         <Button
@@ -54,7 +55,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMessages"
             android:layout_width="380dp"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="80dp"
 
@@ -73,6 +74,16 @@
             android:background="@drawable/ic_send_message"
             android:backgroundTintMode="src_in"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/navBar"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+
+            app:menu="@menu/menu_nav"
+            />
 
     </RelativeLayout>
 </RelativeLayout>

@@ -24,14 +24,23 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        Intent i = getIntent();
+        username = i.getStringExtra("username");
+
+        updateDisplay(username);
+
+
         String ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
 
         BottomNavigationView navBar = findViewById(R.id.navBar);
 
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
+                Intent i;
 
                 switch (menuItem.getItemId())
 
@@ -39,7 +48,7 @@ public class HomeScreen extends AppCompatActivity {
 
                     case R.id.nbChats:
 
-                        Intent i = new Intent(HomeScreen.this , Chats.class);
+                        i = new Intent(HomeScreen.this , Chats.class);
                         i.putExtra("username", username);
 
                         startActivity(i);
@@ -47,18 +56,22 @@ public class HomeScreen extends AppCompatActivity {
                         break;
 
                     case R.id.nbTrips:
-                        Intent ii = new Intent(HomeScreen.this , OpenTrips.class);
-                        ii.putExtra("username", username);
-                        startActivity(ii);
+                        i = new Intent(HomeScreen.this , OpenTrips.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
                         break;
 
                     case R.id.nbhome:
-
-                        Intent in = new Intent(HomeScreen.this , HomeScreen.class);
-                        in.putExtra("username", username);
-                       startActivity(in);
+                       i = new Intent(HomeScreen.this , HomeScreen.class);
+                       i.putExtra("username", username);
+                       startActivity(i);
                         break;
 
+                    case R.id.nbCities:
+                        i = new Intent(HomeScreen.this , CitiesVisited.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
                 }
 
 
@@ -72,9 +85,9 @@ public class HomeScreen extends AppCompatActivity {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String username;
-                username = (String) dataSnapshot.child("username").getValue();
-                updateDisplay(username);
+               // String username;
+               // username = (String) dataSnapshot.child("username").getValue();
+                //updateDisplay(username);
             }
 
             @Override

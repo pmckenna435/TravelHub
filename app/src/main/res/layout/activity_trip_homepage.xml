@@ -21,20 +21,23 @@
             android:id="@+id/btnGroupChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
+           android:layout_alignParentLeft="true"
             android:layout_marginTop="150dp"
-            android:drawableTop="@drawable/ic_group_chat"
+            android:layout_marginLeft="50dp"
             android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_group_chat"
             android:text="Chat" />
 
         <Button
             android:id="@+id/btnItinerary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="250dp"
+           android:layout_alignParentRight="true"
+            android:layout_marginTop="150dp"
             android:drawableTop="@drawable/ic_itinerary"
             android:text="itinerary"
+           android:layout_marginRight="50dp"
+
             android:background="@android:color/transparent"
 
 
@@ -45,10 +48,11 @@
             android:id="@+id/btnAddUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="45dp"
+
             android:layout_marginTop="250dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentRight="false"
             android:drawableTop="@drawable/ic_add"
+            android:layout_centerInParent="true"
             android:background="@android:color/transparent"
             android:text="add user" />
 
@@ -63,5 +67,19 @@
 
 
     </RelativeLayout>
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/navBar"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+
+            app:menu="@menu/menu_nav"
+            />
+
+
+
 
 </RelativeLayout>

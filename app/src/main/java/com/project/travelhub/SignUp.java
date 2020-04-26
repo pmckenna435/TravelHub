@@ -81,6 +81,11 @@ public class SignUp extends AppCompatActivity {
                             mDatabase.child("Users").child(userid).setValue(user);
 
                             Intent i = new Intent(SignUp.this , HomeScreen.class);
+
+                            i.putExtra("username" , userUsername);
+                            i.putExtra("total" , "0");
+                            i.putExtra("amount" , "0");
+
                             startActivity(i);
                         } else{
                             Toast.makeText(SignUp.this,"Failed to Create!", Toast.LENGTH_SHORT).show();

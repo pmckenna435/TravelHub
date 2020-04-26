@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:background="@drawable/grad_background"
-    >
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
+
+
+
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="25dp"
+        android:layout_below="@+id/txtTravelHubTitle"
         android:text=" Welcome to Travel hub \n \n   The place to connect\n  with other backpackers"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.319" />
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/btnCreateAccount"
         android:layout_width="304dp"
         android:layout_height="61dp"
         android:layout_marginStart="53dp"
-
-        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="54dp"
         android:layout_marginBottom="200dp"
-
-        android:text="Create Account"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+        android:layout_below="@+id/btnLogin"
+        android:background="@drawable/button_rec_round_green"
+        android:text="Create Account" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/txtTravelHubTitle"
+        android:layout_marginTop="50dp"
         android:text="Travel Hub"
-        android:textSize="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12" />
+        android:textSize="50dp" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="304dp"
+        android:layout_centerHorizontal="true"
         android:layout_height="61dp"
         android:layout_marginStart="53dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="54dp"
         android:layout_marginBottom="25dp"
-        android:text="Already have an account?"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:layout_below="@+id/textView2"
+        android:background="@drawable/button_rec_round_green"
+        android:text="Already have an account?" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
+
+</RelativeLayout>

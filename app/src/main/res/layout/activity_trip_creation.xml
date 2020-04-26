@@ -164,10 +164,15 @@ android:layout_alignLeft="@id/etTripName"
             />
 
 
-
-
-
-
-
     </RelativeLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/navBar"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+
+        app:menu="@menu/menu_nav"
+        />
 </RelativeLayout>
