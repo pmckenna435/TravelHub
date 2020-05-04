@@ -37,56 +37,8 @@ public class CitiesVisited extends AppCompatActivity implements AddCityDialog.Ad
         final String username;
         Intent in = getIntent();
         username = in.getStringExtra("username");
-
-        BottomNavigationView navBar = findViewById(R.id.navBar);
-
-
-
-        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Intent i;
-
-                switch (menuItem.getItemId())
-
-                {
-
-                    case R.id.nbChats:
-
-                        i = new Intent(CitiesVisited.this , Chats.class);
-                        i.putExtra("username", username);
-
-                        startActivity(i);
-
-                        break;
-
-                    case R.id.nbTrips:
-                        i = new Intent(CitiesVisited.this , OpenTrips.class);
-                        i.putExtra("username", username);
-                        startActivity(i);
-                        break;
-
-                    case R.id.nbhome:
-                        i = new Intent(CitiesVisited.this , HomeScreen.class);
-                        i.putExtra("username", username);
-                        startActivity(i);
-                        break;
-
-                    case R.id.nbCities:
-                        i = new Intent(CitiesVisited.this , CitiesVisited.class);
-                        i.putExtra("username", username);
-                        startActivity(i);
-                        break;
-                }
-
-
-                return true;
-            }
-        });
-
-
-
-
+        // call method to set nav bar
+        setNavBar(username);
 
 
         // get current users id in order to get the users cities easier
@@ -131,19 +83,6 @@ public class CitiesVisited extends AppCompatActivity implements AddCityDialog.Ad
 
             }
         });
-
-
-
-
-        //rvItinerary =  findViewById(R.id.rvItinerary);
-
-        //LinearLayoutManager lm = new LinearLayoutManager(getBaseContext());
-
-        //rvItinerary.setLayoutManager(lm);
-
-        //adapter = new ItineraryDisplayAdapter(itineraryDays,c,tripID);
-        //rvItinerary.setAdapter(adapter);
-
 
 
     }
@@ -217,4 +156,55 @@ public class CitiesVisited extends AppCompatActivity implements AddCityDialog.Ad
 
 
     }
+
+    public  void setNavBar(final String username){
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+        navBar.setSelectedItemId(R.id.nbCities);
+
+
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent i;
+
+                switch (menuItem.getItemId())
+
+                {
+
+                    case R.id.nbChats:
+
+                        i = new Intent(CitiesVisited.this , Chats.class);
+                        i.putExtra("username", username);
+
+                        startActivity(i);
+
+                        break;
+
+                    case R.id.nbTrips:
+                        i = new Intent(CitiesVisited.this , OpenTrips.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbhome:
+                        i = new Intent(CitiesVisited.this , HomeScreen.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbCities:
+                        i = new Intent(CitiesVisited.this , CitiesVisited.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+                }
+
+
+                return true;
+            }
+        });
+
+
+    } // nav
+
 }

@@ -43,18 +43,25 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
        final User nextUser = users.get(position);
        final String nextUserID = usersID.get(position);
 
+
+       // assign the values to variables
        String tempTotal = nextUser.getRating_total();
        String tempAmount = nextUser.getNumber_of_ratings();
 
+       // convert the string to double
        double tempDoubleTotal = Double.parseDouble(tempTotal);
        double tempDoubleAmount = Double.parseDouble(tempAmount);
 
+       // calculate average rating
         double avg = tempDoubleTotal/tempDoubleAmount;
          DecimalFormat decFormat = new DecimalFormat("#.##");
          avg = valueOf(decFormat.format(avg));
 
+        if(tempDoubleTotal == 0 && tempDoubleAmount == 0){
+            avg = 0;
+        }
 
-
+         //display the rating and username
        holder.rating.setText("Rating: " + avg);
        holder.username.setText(nextUser.getUsername());
 
@@ -170,7 +177,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public ViewHolder(View view){
             super(view);
             this.view = view;
-            username = view.findViewById(R.id.txtUserEmail);
+            username = view.findViewById(R.id.txtUser);
             rating = view.findViewById(R.id.txtRateOrCity);
         }
 

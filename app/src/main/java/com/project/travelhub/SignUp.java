@@ -24,7 +24,7 @@ import java.util.List;
 public class SignUp extends AppCompatActivity {
 
     EditText password, email, city , username;
-    Button btnCreateUser , btnAddCityToList;
+    Button btnCreateUser , btnClear;
     FirebaseAuth fAuth;
     List cities = new ArrayList();
 
@@ -38,20 +38,22 @@ public class SignUp extends AppCompatActivity {
         city = findViewById(R.id.txtCity);
         username = findViewById(R.id.txtUsername);
         btnCreateUser = findViewById(R.id.btnCreate);
-        btnAddCityToList = findViewById(R.id.btnAddCity);
+       btnClear = findViewById(R.id.btnClear);
 
 
         fAuth = FirebaseAuth.getInstance();
 
 
 
-        btnAddCityToList.setOnClickListener(new View.OnClickListener() {
+        btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             // String cityToAdd = city.getText().toString().trim();
-              //  cities.add(cityToAdd);
-             //   city.setText("");
-              //  Toast.makeText(SignUp.this,"City Added", Toast.LENGTH_SHORT).show();
+
+                password.setText("");
+                username.setText("");
+                email.setText("");
+                city.setText("");
+                Toast.makeText(SignUp.this,"Data Cleared", Toast.LENGTH_SHORT).show();
 
             }
         });

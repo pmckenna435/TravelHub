@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,17 +54,36 @@ public class TripCreation extends AppCompatActivity {
         Intent in = getIntent();
 
         username = in.getStringExtra("username");
+
+        setNavBar(username);
+
+
         final Calendar startCal = Calendar.getInstance();
         final Calendar endCal = Calendar.getInstance();
        city = findViewById(R.id.etCity);
 
         Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
         Button btnAddCity = (Button) findViewById(R.id.btnAdd);
+        Button btnClear = (Button) findViewById(R.id.btnClear);
+
+
        startDateText = findViewById(R.id.tvStartDate);
        endDateText = findViewById(R.id.tvEndDate);
        test = findViewById(R.id.tvTest);
        final EditText name;
        name = findViewById(R.id.etTripName);
+
+       btnClear.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               name.setText("");
+               startDateText.setText("Start Date");
+               endDateText.setText("End date");
+               cities.clear();
+               Toast.makeText(TripCreation.this,"cleared data", Toast.LENGTH_SHORT).show();
+
+           }
+       });
 
 
 
@@ -81,6 +102,14 @@ public class TripCreation extends AppCompatActivity {
            @Override
            public void onClick(View v) {
 
+
+
+
+
+
+
+
+
                String fuser;
                fuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
                String tripName = name.getText().toString();
@@ -95,68 +124,86 @@ public class TripCreation extends AppCompatActivity {
                //int numberOfDays = endCal.getTime() - startCal.getTime()
                Date startDateDate = startCal.getTime();
                Date endDateDate = endCal.getTime();
-               Calendar compareCal = Calendar.getInstance();
-               compareCal = (Calendar) startCal.clone();
-               int i = 0;
-
-              // long diff = (( endDateDate.getTime() - startDateDate.getTime())/8640000);
-
-               boolean dateMet = false;
-               while (dateMet == false){
-
-                   i ++;
-                   int year = compareCal.get(Calendar.YEAR);
-                   int month = compareCal.get(Calendar.MONTH);
-                   int date =  compareCal.get(Calendar.DAY_OF_MONTH);
-                   int dayOfWeek = compareCal.get(Calendar.DAY_OF_WEEK);
-
-                   ItineraryDay dayToAdd = new ItineraryDay(date,month, year, dayOfWeek);
-                   itinerary.add(dayToAdd);
-
-                   compareCal.add(Calendar.DAY_OF_MONTH, 1);
-                   Date compareDateDate = compareCal.getTime();
-
-                   if (endDateDate.compareTo(compareDateDate) < 0){
-                     dateMet = true;
-                   }
-
-               } // while
-
-              Trip newTrip = new Trip(tripName,cities,users,startOfTrip, endOfTrip, itinerary );
-
-               DatabaseReference mRef;
-               mRef = FirebaseDatabase.getInstance().getReference("Trips");
-               DatabaseReference childRef = mRef.push();
-               final String childkey = childRef.getKey();
-               mRef.child(childkey).setValue(newTrip);
-
-               final DatabaseReference mDatabase ;
-
-               mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(fuser);
 
 
-               mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       List user_trips = new ArrayList();
-                       user_trips = (ArrayList) dataSnapshot.child("user_trips").getValue();
+               if(startDateDate.compareTo(endDateDate) > 0){
 
-                       user_trips.add(childkey);
-                       mDatabase.child("user_trips").setValue(user_trips);
-                   }
+                   name.setText("");
+                   startDateText.setText("Start Date");
+                   endDateText.setText("End date");
+                   cities.clear();
+                   Toast.makeText(TripCreation.this,"Error! Start date is later then End date", Toast.LENGTH_SHORT).show();
 
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError databaseError) {
+               } else {
 
-                   }
-               });
 
-               Intent toTripPage = new Intent(TripCreation.this , TripHomepage.class);
-               toTripPage.putExtra("trip_id", childkey);
-               toTripPage.putExtra("username", username);
-               startActivity(toTripPage);
+                   Calendar compareCal = Calendar.getInstance();
+                   compareCal = (Calendar) startCal.clone();
+                   int i = 0;
 
-           }
+                   // long diff = (( endDateDate.getTime() - startDateDate.getTime())/8640000);
+
+
+                   // code below calculates the amount of days the user is going for
+                   boolean dateMet = false;
+                   while (dateMet == false) {
+
+                       i++;
+                       int year = compareCal.get(Calendar.YEAR);
+                       int month = compareCal.get(Calendar.MONTH);
+                       int date = compareCal.get(Calendar.DAY_OF_MONTH);
+                       int dayOfWeek = compareCal.get(Calendar.DAY_OF_WEEK);
+
+                       ItineraryDay dayToAdd = new ItineraryDay(date, month, year, dayOfWeek);
+                       itinerary.add(dayToAdd);
+
+                       compareCal.add(Calendar.DAY_OF_MONTH, 1);
+                       Date compareDateDate = compareCal.getTime();
+
+                       if (endDateDate.compareTo(compareDateDate) < 0) {
+                           dateMet = true;
+                       }
+
+                   } // while
+
+                   Trip newTrip = new Trip(tripName, cities, users, startOfTrip, endOfTrip, itinerary);
+
+                   DatabaseReference mRef;
+                   mRef = FirebaseDatabase.getInstance().getReference("Trips");
+                   DatabaseReference childRef = mRef.push();
+                   final String childkey = childRef.getKey();
+                   mRef.child(childkey).setValue(newTrip);
+
+                   final DatabaseReference mDatabase;
+
+                   mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(fuser);
+
+
+                   mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                       @Override
+                       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                           List user_trips = new ArrayList();
+                           user_trips = (ArrayList) dataSnapshot.child("user_trips").getValue();
+
+                           user_trips.add(childkey);
+                           mDatabase.child("user_trips").setValue(user_trips);
+                       }
+
+                       @Override
+                       public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                       }
+                   });
+
+                   Intent toTripPage = new Intent(TripCreation.this, TripHomepage.class);
+                   toTripPage.putExtra("trip_id", childkey);
+                   toTripPage.putExtra("tripname", tripName);
+                   toTripPage.putExtra("username", username);
+                   startActivity(toTripPage);
+
+               }
+
+           } // on click
        });
 
 
@@ -179,8 +226,9 @@ public class TripCreation extends AppCompatActivity {
        startDate = new DatePickerDialog.OnDateSetListener() {
            @Override
            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                int MonthToDisplay = month ++; // month starts at 0
+               startDateText.setText(dayOfMonth + "/" + MonthToDisplay + "/" + year);
 
-               startDateText.setText(month + "/" + dayOfMonth + "/" + year);
                startCal.set(year,month,dayOfMonth);
 
 
@@ -208,7 +256,8 @@ public class TripCreation extends AppCompatActivity {
         endDate = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                endDateText.setText(month + "/" + dayOfMonth + "/" + year);
+                int displayMonth = month ++;
+                endDateText.setText(dayOfMonth + "/" + displayMonth + "/" + year);
                 endCal.set(year,month,dayOfMonth);
 
 
@@ -220,5 +269,54 @@ public class TripCreation extends AppCompatActivity {
 
 
 
+    }
+
+
+
+
+    public  void setNavBar(final String username) {
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+        navBar.setSelectedItemId(R.id.nbTrips);
+
+
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent i;
+
+                switch (menuItem.getItemId()) {
+
+                    case R.id.nbChats:
+
+                        i = new Intent(TripCreation.this, Chats.class);
+                        i.putExtra("username", username);
+
+                        startActivity(i);
+
+                        break;
+
+                    case R.id.nbTrips:
+                        i = new Intent(TripCreation.this, OpenTrips.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbhome:
+                        i = new Intent(TripCreation.this, HomeScreen.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbCities:
+                        i = new Intent(TripCreation.this, CitiesVisited.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+                }
+
+
+                return true;
+            }
+        });
     }
 }

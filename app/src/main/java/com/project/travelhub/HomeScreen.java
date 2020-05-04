@@ -18,8 +18,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+
+import static java.lang.Double.valueOf;
+
 public class HomeScreen extends AppCompatActivity {
         private String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,12 +33,66 @@ public class HomeScreen extends AppCompatActivity {
         Intent i = getIntent();
         username = i.getStringExtra("username");
 
-        updateDisplay(username);
-
-
         String ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(ID);
 
+        // calls methods to update the display and navigation
+        updateDisplay(username , ref);
+        setNavBar(username);
+    }
+
+
+    public void updateDisplay(String username , DatabaseReference ref){
+
+        // set the username display
+        TextView txtUsername = findViewById(R.id.txtUsernameDisplay);
+        txtUsername.setText(username);
+        this.username = username;
+
+        //set the rating
+
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // gets values from firebase
+               String tempTotal = (String) dataSnapshot.child("rating_total").getValue();
+                String tempAmount = (String) dataSnapshot.child("number_of_ratings").getValue();
+
+                // converts the values
+                double tempDoubleTotal = Double.parseDouble(tempTotal);
+                double tempDoubleAmount = Double.parseDouble(tempAmount);
+
+                // calculates the average
+                double avg = tempDoubleTotal/tempDoubleAmount;
+                DecimalFormat decFormat = new DecimalFormat("#.##");
+                avg = valueOf(decFormat.format(avg));
+
+                if(tempDoubleTotal == 0 && tempDoubleAmount == 0){
+                    avg = 0;
+                }
+
+                //Displays
+                TextView txtRating = findViewById(R.id.txtAvgRatingValue);
+                txtRating.setText(""+ avg);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+
+
+
+
+
+    }
+
+    public void setNavBar(final String username){
 
         BottomNavigationView navBar = findViewById(R.id.navBar);
 
@@ -62,9 +121,9 @@ public class HomeScreen extends AppCompatActivity {
                         break;
 
                     case R.id.nbhome:
-                       i = new Intent(HomeScreen.this , HomeScreen.class);
-                       i.putExtra("username", username);
-                       startActivity(i);
+                        i = new Intent(HomeScreen.this , HomeScreen.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
                         break;
 
                     case R.id.nbCities:
@@ -80,53 +139,6 @@ public class HomeScreen extends AppCompatActivity {
         });
 
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(ID);
 
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               // String username;
-               // username = (String) dataSnapshot.child("username").getValue();
-                //updateDisplay(username);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-        Button btnChatScreen = (Button) findViewById(R.id.btnChat);
-        Button btnTripScreen = (Button) findViewById(R.id.btnTrips);
-
-        btnChatScreen.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(HomeScreen.this , Chats.class);
-                i.putExtra("username", username);
-                startActivity(i);
-            }
-
-        });
-
-        btnTripScreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(HomeScreen.this , OpenTrips.class);
-                i.putExtra("username", username);
-                startActivity(i);
-            }
-        });
-
-
-    }
-
-
-    public void updateDisplay(String username){
-        TextView txtUsername = findViewById(R.id.txtUsernameDisplay);
-        txtUsername.setText(username);
-        this.username = username;
-
-    }
+    }// nav
 }

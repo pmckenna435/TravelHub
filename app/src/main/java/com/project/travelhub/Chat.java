@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,15 +40,12 @@ public class Chat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         List cities_visited = new ArrayList();
-        //cities_visited.add("london");
-        //cities_visited.add("dublin");
-        //rvUsers = findViewById(R.id.rvUserList);
-        //rvUsers.setHasFixedSize(true);
 
-        //getUsersFromDatabase();
 
         Intent i = getIntent();
         username = i.getStringExtra("username");
+
+        setNavBar(username);
 
         final Button btnSearch = findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +151,54 @@ public class Chat extends AppCompatActivity {
         });
     }//get user from database
 
+
+
+    public void setNavBar(final String username) {
+
+
+
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+        navBar.setSelectedItemId(R.id.nbChats);
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent i;
+
+                switch (menuItem.getItemId()) {
+
+                    case R.id.nbChats:
+
+                        i = new Intent(Chat.this, Chats.class);
+                        i.putExtra("username", username);
+
+                        startActivity(i);
+
+                        break;
+
+                    case R.id.nbTrips:
+                        i = new Intent(Chat.this, OpenTrips.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbhome:
+                        i = new Intent(Chat.this, HomeScreen.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbCities:
+                        i = new Intent(Chat.this, CitiesVisited.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+                }
+
+
+                return true;
+            }
+        });
+    } // nav bar
 
 
 }

@@ -91,7 +91,7 @@ public class OpenChatsAdapter extends RecyclerView.Adapter<OpenChatsAdapter.View
         public ViewHolder(View view){
             super(view);
             this.view = view;
-            username = view.findViewById(R.id.txtUserEmail);
+            username = view.findViewById(R.id.txtUser);
             city = view.findViewById(R.id.txtRateOrCity);
         }
 

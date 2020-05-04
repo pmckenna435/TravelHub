@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +32,10 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
         Intent in = getIntent();
         final String tripID = in.getStringExtra("trip_id");
         username = in.getStringExtra("username");
+        String tripname = in.getStringExtra("tripname");
+        TextView tripnameText = findViewById(R.id.txtTitle);
+        tripnameText.setText(tripname);
+        setNavBar(username);
         Button btnItinerary = (Button) findViewById(R.id.btnItinerary);
         Button btnAddUser = (Button) findViewById(R.id.btnAddUser);
         Button btnChat = (Button) findViewById(R.id.btnGroupChat);
@@ -38,11 +45,16 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
             @Override
             public void onClick(View v) {
 
+                Intent in = getIntent();
+                String tripname = in.getStringExtra("tripname");
+
+
                 Intent  i  = new Intent(TripHomepage.this, OpenChats.class );
 
                 i.putExtra("ID", tripID);
                 i.putExtra("refToUse" , "Trips");
                 i.putExtra("username", username);
+                i.putExtra("tripname" , tripname);
                 startActivity(i);
 
             }
@@ -63,8 +75,10 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
             public void onClick(View v) {
 
 
+
                 Intent i = new Intent(TripHomepage.this , Itinerary.class);
                 i.putExtra("trip_id", tripID);
+                i.putExtra("username" , username);
                 startActivity(i);
             }
         });
@@ -142,9 +156,54 @@ public class TripHomepage extends AppCompatActivity implements AddUserDialog.Add
         });
 
 
-
-
-
-
     }
+
+
+    public  void setNavBar(final String username) {
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+        navBar.setSelectedItemId(R.id.nbTrips);
+
+
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent i;
+
+                switch (menuItem.getItemId()) {
+
+                    case R.id.nbChats:
+
+                        i = new Intent(TripHomepage.this, Chats.class);
+                        i.putExtra("username", username);
+
+                        startActivity(i);
+
+                        break;
+
+                    case R.id.nbTrips:
+                        i = new Intent(TripHomepage.this, OpenTrips.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbhome:
+                        i = new Intent(TripHomepage.this, HomeScreen.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbCities:
+                        i = new Intent(TripHomepage.this, CitiesVisited.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+                }
+
+
+                return true;
+            }
+        });
+    }
+
+
 }

@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +33,10 @@ public class Itinerary extends AppCompatActivity {
 
         Intent i = getIntent();
         final String tripID = i.getStringExtra("trip_id");
+        String username = i.getStringExtra("username");
+
+        setNavBar(username);
+
         Toast.makeText(Itinerary.this,tripID, Toast.LENGTH_SHORT).show();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Trips").child(tripID).child("itinerary");
 
@@ -78,4 +84,54 @@ public class Itinerary extends AppCompatActivity {
         });
 
     }
+
+
+    public  void setNavBar(final String username) {
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+        navBar.setSelectedItemId(R.id.nbTrips);
+
+
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent i;
+
+                switch (menuItem.getItemId()) {
+
+                    case R.id.nbChats:
+
+                        i = new Intent(Itinerary.this, Chats.class);
+                        i.putExtra("username", username);
+
+                        startActivity(i);
+
+                        break;
+
+                    case R.id.nbTrips:
+                        i = new Intent(Itinerary.this, OpenTrips.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbhome:
+                        i = new Intent(Itinerary.this, HomeScreen.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbCities:
+                        i = new Intent(Itinerary.this, CitiesVisited.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+                }
+
+
+                return true;
+            }
+        });
+    }
+
+
+
 }

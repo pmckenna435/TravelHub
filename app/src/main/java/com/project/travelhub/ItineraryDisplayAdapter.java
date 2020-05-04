@@ -34,7 +34,7 @@ public class ItineraryDisplayAdapter extends RecyclerView.Adapter<ItineraryDispl
         String activities = nextDay.getActivity();
         int day = nextDay.getDay();
         int month = nextDay.getMonth();
-        month ++; // jan is 0 so month is 1 value behind
+        //month ++; // jan is 0 so month is 1 value behind
         int year = nextDay.getYear();
         String mDate = day + "/" + month + "/" + year;
 

@@ -37,7 +37,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="30dp"
             android:textColor="@android:color/black"
-            android:text="Username test"/>
+            android:text="Username"/>
 
         <TextView
         android:id="@+id/txtAvgRating"

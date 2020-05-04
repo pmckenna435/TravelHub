@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,15 +47,15 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-
-
-
         Intent i = getIntent();
+        username = i.getStringExtra("username");
+        setNavBar(username);
+
         final String iD = i.getStringExtra("ID");
         this.ID = iD;
         final String refToUse = i.getStringExtra("refToUse");
 
-        username = i.getStringExtra("username");
+
         if(refToUse.equals("Chats")){
             recUsername = i.getStringExtra("recUsername");
             TextView displayUsername = findViewById(R.id.txtDisplayUsername);
@@ -85,6 +87,11 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
             });
 
 
+        }else{
+
+            String tripName = i.getStringExtra("tripname");
+            TextView displayName = findViewById(R.id.txtDisplayUsername);
+            displayName.setText(tripName);
         }
 
 
@@ -178,6 +185,8 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
                LinearLayoutManager lm = new LinearLayoutManager(getBaseContext());
                lm.setStackFromEnd(true);
                rvUsers.setLayoutManager(lm);
+               int pos = messages.size() - 1;
+               rvUsers.smoothScrollToPosition(pos);
                adapter = new DisplayChatsAdapter(messages,username,c);
                rvUsers.setAdapter(adapter);
 
@@ -283,4 +292,56 @@ public class OpenChats extends AppCompatActivity implements RateUserDialog.RateU
 
 
     }
+
+
+    public void setNavBar(final String username){
+
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent i;
+
+                switch (menuItem.getItemId())
+
+                {
+
+                    case R.id.nbChats:
+
+                        i = new Intent(OpenChats.this , Chats.class);
+                        i.putExtra("username", username);
+
+                        startActivity(i);
+
+                        break;
+
+                    case R.id.nbTrips:
+                        i = new Intent(OpenChats.this , OpenTrips.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbhome:
+                        i = new Intent(OpenChats.this , HomeScreen.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbCities:
+                        i = new Intent(OpenChats.this , CitiesVisited.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+                }
+
+
+                return true;
+            }
+        });
+
+
+
+    }// nav
+
 }

@@ -17,6 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:text="test"
         android:layout_centerHorizontal="true"
         android:textSize="45dp"
@@ -36,7 +37,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Test text that will be edited by user if they wish to do so"
+            android:text="Test text that will display the activities for a specific day - which the user can edit"
 
             android:layout_marginTop="20dp"
             android:layout_below="@id/txtDateOfSelectedDay"

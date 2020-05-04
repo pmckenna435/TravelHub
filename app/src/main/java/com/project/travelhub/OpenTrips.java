@@ -45,47 +45,7 @@ public class OpenTrips extends AppCompatActivity {
         username = in.getStringExtra("username");
         //final String username;
 
-        BottomNavigationView navBar = findViewById(R.id.navBar);
-        navBar.setSelectedItemId(R.id.nbTrips);
-
-        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-
-                switch (menuItem.getItemId())
-
-                {
-
-                    case R.id.nbChats:
-
-                        Intent i = new Intent(OpenTrips.this , Chats.class);
-                        i.putExtra("username", username);
-
-                        startActivity(i);
-
-                        break;
-
-                    case R.id.nbTrips:
-                        Intent ii = new Intent(OpenTrips.this , OpenTrips.class);
-                        ii.putExtra("username", username);
-                        startActivity(ii);
-                        break;
-
-                    case R.id.nbhome:
-
-                        Intent in = new Intent(OpenTrips.this , HomeScreen.class);
-                        in.putExtra("username", username);
-                        startActivity(in);
-                        break;
-
-                }
-
-
-                return true;
-            }
-        });
-
+        setNavBar(username);
 
 
 
@@ -119,7 +79,9 @@ public class OpenTrips extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List user_trips = new ArrayList();
+
                 user_trips = (ArrayList) dataSnapshot.child("user_trips").getValue();
+
                 // String user = (String) dataSnapshot.child("email").getValue();
                 String user = (String) FirebaseAuth.getInstance().getCurrentUser().getUid();
                 getUsersFromDatabase(user_trips,user);
@@ -217,5 +179,57 @@ public class OpenTrips extends AppCompatActivity {
     }
 
 
+
+
+
+    public void setNavBar(final String username){
+
+        BottomNavigationView navBar = findViewById(R.id.navBar);
+        navBar.setSelectedItemId(R.id.nbTrips);
+        navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent i;
+
+                switch (menuItem.getItemId())
+
+                {
+
+                    case R.id.nbChats:
+
+                        i = new Intent(OpenTrips.this , Chats.class);
+                        i.putExtra("username", username);
+
+                        startActivity(i);
+
+                        break;
+
+                    case R.id.nbTrips:
+                        i = new Intent(OpenTrips.this , OpenTrips.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbhome:
+                        i = new Intent(OpenTrips.this , HomeScreen.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+
+                    case R.id.nbCities:
+                        i = new Intent(OpenTrips.this , CitiesVisited.class);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                        break;
+                }
+
+
+                return true;
+            }
+        });
+
+
+
+    }// nav
 
 }

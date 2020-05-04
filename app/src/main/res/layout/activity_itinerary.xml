@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtTitle"
             android:layout_margin="5dp"
-            android:background="@color/colorAccent"
+
             android:id="@+id/rvItinerary"
 
             />

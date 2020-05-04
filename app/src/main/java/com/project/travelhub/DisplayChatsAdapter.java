@@ -44,9 +44,10 @@ public class DisplayChatsAdapter extends RecyclerView.Adapter<DisplayChatsAdapte
 
         Message nextMessage = messages.get(position);
         String nextText = nextMessage.getText();
+        String nextMessageSender = nextMessage.getSender();
 
         holder.messageToDisplay.setText(nextText);
-
+        holder.userToDisplay.setText(nextMessageSender);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,11 +77,13 @@ public class DisplayChatsAdapter extends RecyclerView.Adapter<DisplayChatsAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public final View view;
         public final TextView messageToDisplay;
+        public final TextView userToDisplay;
 
         public ViewHolder(View view){
             super(view);
             this.view = view;
             messageToDisplay = view.findViewById(R.id.txtSentMessage);
+            userToDisplay = view.findViewById(R.id.txtUsername);
         }
 
     }
